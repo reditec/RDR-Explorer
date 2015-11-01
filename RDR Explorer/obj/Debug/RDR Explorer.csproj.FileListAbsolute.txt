@@ -1,0 +1,11 @@
+c:\users\redit\documents\visual studio 2015\Projects\RDR Explorer\RDR Explorer\bin\Debug\RDR Explorer.exe.config
+c:\users\redit\documents\visual studio 2015\Projects\RDR Explorer\RDR Explorer\bin\Debug\RDR Explorer.exe
+c:\users\redit\documents\visual studio 2015\Projects\RDR Explorer\RDR Explorer\bin\Debug\RDR Explorer.pdb
+c:\users\redit\documents\visual studio 2015\Projects\RDR Explorer\RDR Explorer\obj\Debug\RDR Explorer.csprojResolveAssemblyReference.cache
+c:\users\redit\documents\visual studio 2015\Projects\RDR Explorer\RDR Explorer\obj\Debug\RDR_Explorer.Properties.Resources.resources
+c:\users\redit\documents\visual studio 2015\Projects\RDR Explorer\RDR Explorer\obj\Debug\RDR Explorer.csproj.GenerateResource.Cache
+c:\users\redit\documents\visual studio 2015\Projects\RDR Explorer\RDR Explorer\obj\Debug\RDR Explorer.exe
+c:\users\redit\documents\visual studio 2015\Projects\RDR Explorer\RDR Explorer\obj\Debug\RDR Explorer.pdb
+c:\users\redit\documents\visual studio 2015\Projects\RDR Explorer\RDR Explorer\obj\Debug\RDR_Explorer.Main.resources
+c:\users\redit\documents\visual studio 2015\Projects\RDR Explorer\RDR Explorer\bin\Debug\xextool.exe
+c:\users\redit\documents\visual studio 2015\Projects\RDR Explorer\RDR Explorer\bin\Debug\x360_imports.idc
