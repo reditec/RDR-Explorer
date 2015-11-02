@@ -26,6 +26,7 @@ namespace RDR_Explorer
         IniFile settingsIni = new IniFile("Settings.ini");
         private void CheckExeFile()
         {
+            
             do
             {
 
@@ -68,9 +69,11 @@ namespace RDR_Explorer
             {
                 Application.Exit();
             }
+            
         }
         private void Main_Shown(object sender, EventArgs e)
         {
+            statusProgress.ProgressBar.Value = 0;
             if (!(settingsIni.KeyExists("FirstLaunch")))
             {
                 MessageBox.Show("Thank you for installing RDR Explorer." + Environment.NewLine + "RDR Explorer is still a WIP (work in progress) tool." + Environment.NewLine + "Please report any bugs to the official GTAForums thread" + Environment.NewLine + "(Help -> Report a bug).", "Welcome", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -94,7 +97,7 @@ namespace RDR_Explorer
                     byte[] key = keyUtil.FindKey(gameEXE, "RDR"); //Key is not public yet and must be verified --> I will do this tomorrow.
                     if (!(key == null))
                     {
-                        settingsIni.Write("GamePath", openFolder.SelectedPath);
+                        settingsIni.Write("GamePath", settingsIni.Read("GamePath"));
                     }
                     else
                     {
@@ -108,8 +111,9 @@ namespace RDR_Explorer
                     CheckExeFile();
                 }
             }
-            
-           
+
+            statusProgress.ProgressBar.Value = 100;
+            statusLabel.Text = "Key found.";
         }
 
         
