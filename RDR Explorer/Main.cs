@@ -17,16 +17,60 @@ namespace RDR_Explorer
     {
         public Main()
         {
-
+            File.Delete("base.bin");
             InitializeComponent();
             
         }
 
         public string gameEXE = "";
+        IniFile settingsIni = new IniFile("Settings.ini");
+        private void CheckExeFile()
+        {
+            do
+            {
 
+
+                openFolder.Description = "Please select the directory containing default.xex.";
+
+                DialogResult dr = openFolder.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    if (Directory.GetFiles(openFolder.SelectedPath.ToString(), "default.xex", SearchOption.TopDirectoryOnly).Length > 0)
+                    {
+                        gameEXE = openFolder.SelectedPath + "\\default.xex";
+
+                        RageLib.Common.KeyStore.gameEXE = gameEXE;
+                        RageLib.Common.KeyUtil.MYgameExe = gameEXE;
+                        KeyUtil keyUtil = new KeyUtilRDR();
+                        byte[] key = keyUtil.FindKey(gameEXE, "RDR"); //Key is not public yet and must be verified --> I will do this tomorrow.
+                        if (!(key == null))
+                        {
+                            settingsIni.Write("GamePath", openFolder.SelectedPath);
+                        }
+                        else
+                        {
+                            MessageBox.Show("The file default.xex was found, but it seems that this version of the file is not supported or your file is broken. Please try another one.", "Executable file not supported", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("The file default.xex was not found!" + Environment.NewLine + "Please specify a new directory containing default.xex", "Executable file not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    openFolder.SelectedPath = "";
+                    break;
+                }
+            } while (!(settingsIni.KeyExists("GamePath")));
+
+            if (openFolder.SelectedPath == "")
+            {
+                Application.Exit();
+            }
+        }
         private void Main_Shown(object sender, EventArgs e)
         {
-            var settingsIni = new IniFile("Settings.ini");
             if (!(settingsIni.KeyExists("FirstLaunch")))
             {
                 MessageBox.Show("Thank you for installing RDR Explorer." + Environment.NewLine + "RDR Explorer is still a WIP (work in progress) tool." + Environment.NewLine + "Please report any bugs to the official GTAForums thread" + Environment.NewLine + "(Help -> Report a bug).", "Welcome", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -34,52 +78,41 @@ namespace RDR_Explorer
             }
             if (!(settingsIni.KeyExists("GamePath")))
             {
-                do
-                {
 
-
-                    openFolder.Description = "Please select the directory containing default.xex.";
-                   
-                    DialogResult dr = openFolder.ShowDialog();
-                    if(dr == DialogResult.OK)
-                    {
-                        if (Directory.GetFiles(openFolder.SelectedPath.ToString(), "default.xex", SearchOption.TopDirectoryOnly).Length > 0)
-                        {
-                            gameEXE = openFolder.SelectedPath + "\\default.xex";
-
-                            RageLib.Common.KeyStore.gameEXE = gameEXE;
-                            settingsIni.Write("GamePath", openFolder.SelectedPath);
-                        }
-                        else
-                        {
-                            MessageBox.Show("The file default.xex was not found!" + Environment.NewLine + "Please specify a new directory containing default.xex");
-                        }
-                    } 
-                    else
-                    {
-                        openFolder.SelectedPath = "";
-                        break;
-                    }
-                } while (!(settingsIni.KeyExists("GamePath")));
-
-                if(openFolder.SelectedPath == "")
-                {
-                    Application.Exit();
-                }
-               
-                
-                
-
+                CheckExeFile();
                 //settingsIni.Write("FirstLaunch", "true");
             }
-            RageLib.Common.KeyUtil.MYgameExe = gameEXE;
-            LoadGameDirectory(new KeyUtilRDR());
+            else
+            {
+                if (Directory.GetFiles(settingsIni.Read("GamePath"), "default.xex", SearchOption.TopDirectoryOnly).Length > 0)
+                {
+                    gameEXE = settingsIni.Read("GamePath") + "\\default.xex";
+
+                    RageLib.Common.KeyStore.gameEXE = gameEXE;
+                    RageLib.Common.KeyUtil.MYgameExe = gameEXE;
+                    KeyUtil keyUtil = new KeyUtilRDR();
+                    byte[] key = keyUtil.FindKey(gameEXE, "RDR"); //Key is not public yet and must be verified --> I will do this tomorrow.
+                    if (!(key == null))
+                    {
+                        settingsIni.Write("GamePath", openFolder.SelectedPath);
+                    }
+                    else
+                    {
+                        MessageBox.Show("The file default.xex was found, but it seems that this version of the file is not supported or your file is broken. Please try another one.", "Executable file not supported", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        CheckExeFile();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("The file default.xex was not found!" + Environment.NewLine + "Please specify a new directory containing default.xex", "Executable file not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CheckExeFile();
+                }
+            }
+            
+           
         }
 
-        private void LoadGameDirectory(KeyUtil keyUtil)
-        {
-            byte[] key = keyUtil.FindKey(gameEXE, "RDR"); //Key is not public yet and must be verified --> I will do this tomorrow.
-        }
+        
 
         //private void bgwListBuilder_DoWork(object sender, DoWorkEventArgs e)
         //{

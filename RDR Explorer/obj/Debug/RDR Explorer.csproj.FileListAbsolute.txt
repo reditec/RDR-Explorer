@@ -9,3 +9,14 @@ c:\users\redit\documents\visual studio 2015\Projects\RDR Explorer\RDR Explorer\o
 c:\users\redit\documents\visual studio 2015\Projects\RDR Explorer\RDR Explorer\obj\Debug\RDR_Explorer.Main.resources
 c:\users\redit\documents\visual studio 2015\Projects\RDR Explorer\RDR Explorer\bin\Debug\xextool.exe
 c:\users\redit\documents\visual studio 2015\Projects\RDR Explorer\RDR Explorer\bin\Debug\x360_imports.idc
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Debug\RDR Explorer.exe.config
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR Explorer.exe
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR Explorer.pdb
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Debug\xextool.exe
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Debug\x360_imports.idc
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Debug\RDR Explorer.exe
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Debug\RDR Explorer.pdb
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR Explorer.csprojResolveAssemblyReference.cache
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR_Explorer.Main.resources
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR_Explorer.Properties.Resources.resources
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR Explorer.csproj.GenerateResource.Cache

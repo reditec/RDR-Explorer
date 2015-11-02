@@ -42,23 +42,27 @@ namespace RageLib.Common
             startInfo.CreateNoWindow = true;
             Process BINextractor = Process.Start(startInfo);
             BINextractor.WaitForExit();
-            var fs = new FileStream("base.bin", FileMode.Open, FileAccess.Read);
-            foreach (var u in SearchOffsets)
+            if(File.Exists("base.bin"))
             {
-                if (u <= fs.Length - 32)
+                var fs = new FileStream("base.bin", FileMode.Open, FileAccess.Read);
+                foreach (var u in SearchOffsets)
                 {
-                    var tempKey = new byte[32];
-                    fs.Seek(u, SeekOrigin.Begin);
-                    fs.Read(tempKey, 0, 32);
-                    var hash = BitConverter.ToString(SHA1.Create().ComputeHash(tempKey)).Replace("-", "");
-                    if (hash == "87862497EE46855372B51C7A324A2BB5CD66F4AF")
+                    if (u <= fs.Length - 32)
                     {
-                        key = tempKey;
-                        break;
+                        var tempKey = new byte[32];
+                        fs.Seek(u, SeekOrigin.Begin);
+                        fs.Read(tempKey, 0, 32);
+                        var hash = BitConverter.ToString(SHA1.Create().ComputeHash(tempKey)).Replace("-", "");
+                        if (hash == "87862497EE46855372B51C7A324A2BB5CD66F4AF")
+                        {
+                            key = tempKey;
+                            break;
+                        }
                     }
                 }
+                fs.Close();
             }
-            fs.Close();
+            
             return key;
         }
     }
