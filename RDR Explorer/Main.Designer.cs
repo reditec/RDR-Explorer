@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Red Dead Redemption");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Red Dead Redemption");
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusProgress = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.neuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,9 +64,13 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.openFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.EmptyFolderLabel = new System.Windows.Forms.Label();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.backToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -89,6 +95,11 @@
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(42, 17);
             this.toolStripStatusLabel1.Text = "Status:";
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // menuStrip1
             // 
@@ -288,41 +299,85 @@
             // listView1
             // 
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(184, 24);
+            this.listView1.LargeImageList = this.imageList1;
+            this.listView1.Location = new System.Drawing.Point(184, 49);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(498, 379);
+            this.listView1.Size = new System.Drawing.Size(498, 354);
             this.listView1.TabIndex = 2;
+            this.listView1.TileSize = new System.Drawing.Size(1, 1);
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.listView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseClick);
+            this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
             // 
             // treeView1
             // 
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.treeView1.Location = new System.Drawing.Point(0, 24);
+            this.treeView1.Location = new System.Drawing.Point(0, 49);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "Root";
-            treeNode1.Text = "Red Dead Redemption";
+            treeNode2.Name = "Root";
+            treeNode2.Text = "Red Dead Redemption";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
-            this.treeView1.Size = new System.Drawing.Size(184, 379);
+            treeNode2});
+            this.treeView1.Size = new System.Drawing.Size(184, 354);
             this.treeView1.TabIndex = 3;
+            this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             // 
             // openFolder
             // 
             this.openFolder.ShowNewFolderButton = false;
             // 
-            // statusLabel
+            // backgroundWorker1
             // 
-            this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(0, 17);
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
+            // EmptyFolderLabel
+            // 
+            this.EmptyFolderLabel.AutoSize = true;
+            this.EmptyFolderLabel.BackColor = System.Drawing.Color.White;
+            this.EmptyFolderLabel.Location = new System.Drawing.Point(190, 55);
+            this.EmptyFolderLabel.Name = "EmptyFolderLabel";
+            this.EmptyFolderLabel.Size = new System.Drawing.Size(100, 13);
+            this.EmptyFolderLabel.TabIndex = 4;
+            this.EmptyFolderLabel.Text = "This folder is empty.";
+            this.EmptyFolderLabel.Visible = false;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.backToolStripButton});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(682, 25);
+            this.toolStrip1.TabIndex = 5;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // backToolStripButton
+            // 
+            this.backToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.backToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("backToolStripButton.Image")));
+            this.backToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.backToolStripButton.Name = "backToolStripButton";
+            this.backToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.backToolStripButton.Text = "toolStripButton1";
+            this.backToolStripButton.Click += new System.EventHandler(this.backToolStripButton_Click);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(32, 32);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(682, 425);
+            this.Controls.Add(this.EmptyFolderLabel);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
@@ -332,6 +387,8 @@
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -372,6 +429,10 @@
         private System.Windows.Forms.FolderBrowserDialog openFolder;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
+        private System.Windows.Forms.Label EmptyFolderLabel;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton backToolStripButton;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }
 
