@@ -57,6 +57,7 @@
     </Compile>
     <Compile Include="Inc\IniFile.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="PropertiesLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -93,6 +94,7 @@
     <None Include="Resources\Icon1.ico" />
     <None Include="Resources\shell32_1.ico" />
     <None Include="Resources\red_dead_redemption_icon_by_flitskikker-d315kze %281%29.ico" />
+    <Content Include="KnownFilenames.txt" />
     <Content Include="xextool.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

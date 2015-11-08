@@ -20,8 +20,13 @@ namespace RDR_Explorer
         public Main()
         {
             File.Delete("base.bin");
+            //Disable some UI things
             InitializeComponent();
-            
+            openToolStripMenuItem1.Enabled = false;
+            showInWindowsExplorerToolStripMenuItem2.Enabled = false;
+            copyPathToolStripMenuItem2.Enabled = false;
+            propertiesToolStripMenuItem1.Enabled = false;
+
         }
 
         public string gameEXE = "";
@@ -337,12 +342,12 @@ namespace RDR_Explorer
                 {
                     if (!(listView1.SelectedItems.Count > 1))
                     {
-                        //showInWindowsExplorerToolStripMenuItem1.Enabled = false;
+                        showInWindowsExplorerToolStripMenuItem1.Enabled = false;
                         if (listView1.SelectedItems[0].ImageKey == "????" || listView1.SelectedItems[0].ImageKey == "???")
                         {
-                            //showInWindowsExplorerToolStripMenuItem1.Enabled = true;
+                            showInWindowsExplorerToolStripMenuItem1.Enabled = true;
                         }
-                        //rightStrip.Show(Cursor.Position);
+                        rightStrip.Show(Cursor.Position);
                     }
                 }
             }
@@ -382,10 +387,10 @@ namespace RDR_Explorer
                         EmptyDirectory();
                     }
                     //Disable some UI things
-                    //openToolStripMenuItem1.Enabled = false;
-                    //showInWindowsExplorerToolStripMenuItem2.Enabled = false;
-                    //copyPathToolStripMenuItem2.Enabled = false;
-                    //propertiesToolStripMenuItem1.Enabled = false;
+                    openToolStripMenuItem1.Enabled = false;
+                    showInWindowsExplorerToolStripMenuItem2.Enabled = false;
+                    copyPathToolStripMenuItem2.Enabled = false;
+                    propertiesToolStripMenuItem1.Enabled = false;
                     isWorking = false;
                 }
 
@@ -400,20 +405,20 @@ namespace RDR_Explorer
         {
             if (listView1.SelectedItems.Count > 0)
             {
-                //openToolStripMenuItem1.Enabled = true;
+                openToolStripMenuItem1.Enabled = true;
                 if (listView1.FocusedItem.ImageKey == "????" || listView1.FocusedItem.ImageKey == "???")
                 {
-                    //showInWindowsExplorerToolStripMenuItem2.Enabled = true;
+                    showInWindowsExplorerToolStripMenuItem2.Enabled = true;
                 }
-                //copyPathToolStripMenuItem2.Enabled = true;
-                //propertiesToolStripMenuItem1.Enabled = true;
+                copyPathToolStripMenuItem2.Enabled = true;
+                propertiesToolStripMenuItem1.Enabled = true;
             }
             else
             {
-                //openToolStripMenuItem1.Enabled = false;
-                //showInWindowsExplorerToolStripMenuItem2.Enabled = false;
-                //copyPathToolStripMenuItem2.Enabled = false;
-                //propertiesToolStripMenuItem1.Enabled = false;
+                openToolStripMenuItem1.Enabled = false;
+                showInWindowsExplorerToolStripMenuItem2.Enabled = false;
+                copyPathToolStripMenuItem2.Enabled = false;
+                propertiesToolStripMenuItem1.Enabled = false;
             }
         }
 
@@ -421,10 +426,12 @@ namespace RDR_Explorer
         {
             if (e.Button == MouseButtons.Right)
             {
+                treeView1.SelectedNode = e.Node;
                 if (treeView1.SelectedNode.Bounds.Contains(e.Location) == true)
-                {
-                    //leftStrip.Show(Cursor.Position);
+                {                    
+                    leftStrip.Show(Cursor.Position);
                 }
+                
             }
             else
             {
@@ -442,7 +449,7 @@ namespace RDR_Explorer
                 else
                 {
                     currHier = "";
-                    if (e.Node.Name != "GTAroot")
+                    if (e.Node.Name != "Root")
                     {
                         currentPath = e.Node.Name;
                         currHier = e.Node.Name + @"\";
@@ -509,15 +516,105 @@ namespace RDR_Explorer
                         EmptyDirectory();
                     }
                     //Disable some UI things
-                    //openToolStripMenuItem1.Enabled = false;
-                    //showInWindowsExplorerToolStripMenuItem2.Enabled = false;
-                    //copyPathToolStripMenuItem2.Enabled = false;
-                    //propertiesToolStripMenuItem1.Enabled = false;
+                    openToolStripMenuItem1.Enabled = false;
+                    showInWindowsExplorerToolStripMenuItem2.Enabled = false;
+                    copyPathToolStripMenuItem2.Enabled = false;
+                    propertiesToolStripMenuItem1.Enabled = false;
                     isWorking = false;
                 }
 
             }
         }
+
+        private void showInWindowsExplorerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (treeView1.SelectedNode.Name != "Root")
+            {
+                Process.Start(gameDir + @"\" + treeView1.SelectedNode.Name.ToString());
+            }
+            else
+            {
+                Process.Start(gameDir);
+            }
+        }
+
+        private void copyPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (treeView1.SelectedNode.Name != "Root")
+            {
+                Clipboard.SetText(gameDir + @"\" + treeView1.SelectedNode.Name.ToString());
+            }
+            else
+            {
+                Clipboard.SetText(gameDir);
+            }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFolderVoid();
+        }
+
+        private void showInWindowsExplorerToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (listView1.FocusedItem.ImageKey == "????" || listView1.FocusedItem.ImageKey == "???")
+            {
+                Process.Start(gameDir + @"\" + currHier + listView1.SelectedItems[0].Text);
+            }
+        }
+
+        private void copyPathToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (isWorking != true)
+            {
+                Clipboard.SetText(gameDir + @"\" + currHier + listView1.SelectedItems[0].Text);
+            }
+        }
+
+        private void propertiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PropertiesLoader.ShowFileProperties(gameDir + @"\" + currHier + listView1.SelectedItems[0].Text);
+        }
+
+        private void openToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            openFolderVoid();
+        }
+
+        private void showInWindowsExplorerToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (listView1.FocusedItem.ImageKey == "????" || listView1.FocusedItem.ImageKey == "???")
+            {
+                Process.Start(gameDir + @"\" + currHier + listView1.SelectedItems[0].Text);
+            }
+        }
+
+        private void copyPathToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(gameDir + @"\" + currHier + listView1.SelectedItems[0].Text);
+        }
+
+        private void propertiesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            PropertiesLoader.ShowFileProperties(gameDir + @"\" + currHier + listView1.SelectedItems[0].Text);
+        }
+
+        private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void inhaltToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/OpenRW");
+        }
+
+        private void reportABugToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://gtaforums.com/topic/828211-wip-open-source-red-dead-redemption-explorer/");
+        }
+
+
 
         //private void bgwListBuilder_DoWork(object sender, DoWorkEventArgs e)
         //{
