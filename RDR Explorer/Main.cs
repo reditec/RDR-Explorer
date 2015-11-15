@@ -149,7 +149,7 @@ namespace RDR_Explorer
                  }
              }
 
-            if (gameDir != "")
+            if (settingsIni.Read("GamePath") != "")
             {
                 statusProgress.ProgressBar.Value = 100;
                 statusLabel.Text = "Key found.";
