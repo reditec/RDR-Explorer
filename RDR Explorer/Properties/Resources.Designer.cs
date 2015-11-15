@@ -93,6 +93,16 @@ namespace RDR_Explorer.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
         /// </summary>
+        internal static System.Drawing.Icon rpf {
+            get {
+                object obj = ResourceManager.GetObject("rpf", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
+        /// </summary>
         internal static System.Drawing.Icon xex {
             get {
                 object obj = ResourceManager.GetObject("xex", resourceCulture);

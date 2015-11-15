@@ -127,6 +127,9 @@
   <data name="noExt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\shell32_1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="rpf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_RPF.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="xex" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\red_dead_redemption_icon_by_flitskikker-d315kze (1).ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

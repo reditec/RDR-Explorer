@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>red_dead_redemption_icon_by_flitskikker-d315kze %281%29.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,9 +49,110 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inc\Compression\BZip2\BZip2.cs" />
+    <Compile Include="Inc\Compression\BZip2\BZip2Constants.cs" />
+    <Compile Include="Inc\Compression\BZip2\BZip2Exception.cs" />
+    <Compile Include="Inc\Compression\BZip2\BZip2InputStream.cs" />
+    <Compile Include="Inc\Compression\BZip2\BZip2OutputStream.cs" />
+    <Compile Include="Inc\Compression\Checksums\Adler32.cs" />
+    <Compile Include="Inc\Compression\Checksums\CRC32.cs" />
+    <Compile Include="Inc\Compression\Checksums\IChecksum.cs" />
+    <Compile Include="Inc\Compression\Checksums\StrangeCRC.cs" />
+    <Compile Include="Inc\Compression\Core\FileSystemScanner.cs" />
+    <Compile Include="Inc\Compression\Core\INameTransform.cs" />
+    <Compile Include="Inc\Compression\Core\IScanFilter.cs" />
+    <Compile Include="Inc\Compression\Core\NameFilter.cs" />
+    <Compile Include="Inc\Compression\Core\PathFilter.cs" />
+    <Compile Include="Inc\Compression\Core\StreamUtils.cs" />
+    <Compile Include="Inc\Compression\Core\WindowsPathUtils.cs" />
+    <Compile Include="Inc\Compression\Encryption\PkzipClassic.cs" />
+    <Compile Include="Inc\Compression\Encryption\ZipAESStream.cs" />
+    <Compile Include="Inc\Compression\Encryption\ZipAESTransform.cs" />
+    <Compile Include="Inc\Compression\GZip\GZIPConstants.cs" />
+    <Compile Include="Inc\Compression\GZip\GZipException.cs" />
+    <Compile Include="Inc\Compression\GZip\GzipInputStream.cs" />
+    <Compile Include="Inc\Compression\GZip\GzipOutputStream.cs" />
+    <Compile Include="Inc\Compression\Lzw\LzwConstants.cs" />
+    <Compile Include="Inc\Compression\Lzw\LzwException.cs" />
+    <Compile Include="Inc\Compression\Lzw\LzwInputStream.cs" />
+    <Compile Include="Inc\Compression\SharpZipBaseException.cs" />
+    <Compile Include="Inc\Compression\Tar\InvalidHeaderException.cs" />
+    <Compile Include="Inc\Compression\Tar\TarArchive.cs" />
+    <Compile Include="Inc\Compression\Tar\TarBuffer.cs" />
+    <Compile Include="Inc\Compression\Tar\TarEntry.cs" />
+    <Compile Include="Inc\Compression\Tar\TarException.cs" />
+    <Compile Include="Inc\Compression\Tar\TarHeader.cs" />
+    <Compile Include="Inc\Compression\Tar\TarInputStream.cs" />
+    <Compile Include="Inc\Compression\Tar\TarOutputStream.cs" />
+    <Compile Include="Inc\Compression\Zip\Comp\Deflater.cs" />
+    <Compile Include="Inc\Compression\Zip\Comp\DeflaterConstants.cs" />
+    <Compile Include="Inc\Compression\Zip\Comp\DeflaterEngine.cs" />
+    <Compile Include="Inc\Compression\Zip\Comp\DeflaterHuffman.cs" />
+    <Compile Include="Inc\Compression\Zip\Comp\DeflaterPending.cs" />
+    <Compile Include="Inc\Compression\Zip\Comp\Inflater.cs" />
+    <Compile Include="Inc\Compression\Zip\Comp\InflaterDynHeader.cs" />
+    <Compile Include="Inc\Compression\Zip\Comp\InflaterHuffmanTree.cs" />
+    <Compile Include="Inc\Compression\Zip\Comp\PendingBuffer.cs" />
+    <Compile Include="Inc\Compression\Zip\Comp\Streams\DeflaterOutputStream.cs" />
+    <Compile Include="Inc\Compression\Zip\Comp\Streams\InflaterInputStream.cs" />
+    <Compile Include="Inc\Compression\Zip\Comp\Streams\OutputWindow.cs" />
+    <Compile Include="Inc\Compression\Zip\Comp\Streams\StreamManipulator.cs" />
+    <Compile Include="Inc\Compression\Zip\FastZip.cs" />
+    <Compile Include="Inc\Compression\Zip\IEntryFactory.cs" />
+    <Compile Include="Inc\Compression\Zip\WindowsNameTransform.cs" />
+    <Compile Include="Inc\Compression\Zip\ZipConstants.cs" />
+    <Compile Include="Inc\Compression\Zip\ZipEntry.cs" />
+    <Compile Include="Inc\Compression\Zip\ZipEntryFactory.cs" />
+    <Compile Include="Inc\Compression\Zip\ZipException.cs" />
+    <Compile Include="Inc\Compression\Zip\ZipExtraData.cs" />
+    <Compile Include="Inc\Compression\Zip\ZipFile.cs" />
+    <Compile Include="Inc\Compression\Zip\ZipHelperStream.cs" />
+    <Compile Include="Inc\Compression\Zip\ZipInputStream.cs" />
+    <Compile Include="Inc\Compression\Zip\ZipNameTransform.cs" />
+    <Compile Include="Inc\Compression\Zip\ZipOutputStream.cs" />
+    <Compile Include="Inc\Compression\zlib\Adler32.cs" />
+    <Compile Include="Inc\Compression\zlib\Deflate.cs" />
+    <Compile Include="Inc\Compression\zlib\InfBlocks.cs" />
+    <Compile Include="Inc\Compression\zlib\InfCodes.cs" />
+    <Compile Include="Inc\Compression\zlib\Inflate.cs" />
+    <Compile Include="Inc\Compression\zlib\InfTree.cs" />
+    <Compile Include="Inc\Compression\zlib\StaticTree.cs" />
+    <Compile Include="Inc\Compression\zlib\SupportClass.cs" />
+    <Compile Include="Inc\Compression\zlib\Tree.cs" />
+    <Compile Include="Inc\Compression\zlib\ZInputStream.cs" />
+    <Compile Include="Inc\Compression\zlib\Zlib.cs" />
+    <Compile Include="Inc\Compression\zlib\ZOutputStream.cs" />
+    <Compile Include="Inc\Compression\zlib\ZStream.cs" />
+    <Compile Include="Inc\Compression\zlib\ZStreamException.cs" />
     <Compile Include="Inc\RageLIB\KeyStore.cs" />
     <Compile Include="Inc\RageLIB\KeyUtil.cs" />
     <Compile Include="Inc\RageLIB\KeyUtilRDR.cs" />
+    <Compile Include="Inc\RageLIB\RPF\Archive.cs" />
+    <Compile Include="Inc\RageLIB\RPF\Common\BigEndianBinaryReader.cs" />
+    <Compile Include="Inc\RageLIB\RPF\Common\BigEndianBinaryWriter.cs" />
+    <Compile Include="Inc\RageLIB\RPF\Common\BitsStream.cs" />
+    <Compile Include="Inc\RageLIB\RPF\Common\DataUtil.cs" />
+    <Compile Include="Inc\RageLIB\RPF\Common\Directory.cs" />
+    <Compile Include="Inc\RageLIB\RPF\Common\Entry.cs" />
+    <Compile Include="Inc\RageLIB\RPF\Common\File.cs" />
+    <Compile Include="Inc\RageLIB\RPF\Common\fileSystemObject.cs" />
+    <Compile Include="Inc\RageLIB\RPF\Common\Hasher.cs" />
+    <Compile Include="Inc\RageLIB\RPF\Common\xcompress2.cs" />
+    <Compile Include="Inc\RageLIB\RPF\RPF6\DirectoryEntry.cs" />
+    <Compile Include="Inc\RageLIB\RPF\RPF6\File.cs" />
+    <Compile Include="Inc\RageLIB\RPF\RPF6\FileEntry.cs" />
+    <Compile Include="Inc\RageLIB\RPF\RPF6\Header.cs" />
+    <Compile Include="Inc\RageLIB\RPF\RPF6\MagicId.cs" />
+    <Compile Include="Inc\RageLIB\RPF\RPF6\TOC.cs" />
+    <Compile Include="Inc\RageLIB\RPF\RPF6\TOCEntry.cs" />
+    <Compile Include="Inc\RageLIB\RPF\RSCTypes.cs" />
+    <Compile Include="Inc\RageLIB\RPF\Version6.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +163,21 @@
     <Compile Include="Program.cs" />
     <Compile Include="PropertiesLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RPFviewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RPFviewer.Designer.cs">
+      <DependentUpon>RPFviewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Saving.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Saving.Designer.cs">
+      <DependentUpon>Saving.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -72,6 +191,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RPFviewer.resx">
+      <DependentUpon>RPFviewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Saving.resx">
+      <DependentUpon>Saving.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -94,11 +219,16 @@
     <None Include="Resources\Icon1.ico" />
     <None Include="Resources\shell32_1.ico" />
     <None Include="Resources\red_dead_redemption_icon_by_flitskikker-d315kze %281%29.ico" />
-    <Content Include="KnownFilenames.txt" />
+    <Content Include="KnownFilenames.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\icon_RPF.ico" />
+    <Content Include="red_dead_redemption_icon_by_flitskikker-d315kze %281%29.ico" />
     <Content Include="xextool.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

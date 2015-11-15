@@ -29,6 +29,7 @@ namespace RageLib.Common
                                0xF87268, //Zombie DLC: Title Update #7
                                0xFBA038, //Zombie DLC: Title Update #6
                                0xFBA098, //Zombie DLC: Title Update #5
+                               0xF844D8, //Red Dead Redemption 1-Disk: Retail
                            };
             }
         }

@@ -12,6 +12,7 @@ using RDR_Explorer.Inc;
 using RageLib.Common;
 using System.Threading;
 using System.Diagnostics;
+using System.Net;
 
 namespace RDR_Explorer
 {
@@ -39,6 +40,7 @@ namespace RDR_Explorer
         string currentPath = "";
         FileInfo[] fileEntries = null; //array for displaying files
         DirectoryInfo[] folderEntries = null; ////array for displaying fodlers
+        int version = 1000001; //version = 1.00 build = 0001
 
         private void CheckExeFile()
         {
@@ -57,11 +59,12 @@ namespace RDR_Explorer
                         if (Directory.GetFiles(openFolder.SelectedPath.ToString(), "default.xex", SearchOption.TopDirectoryOnly).Length > 0)
                         {
                             gameEXE = openFolder.SelectedPath + "\\default.xex";
-
+                            
                             RageLib.Common.KeyStore.gameEXE = gameEXE;
                             RageLib.Common.KeyUtil.MYgameExe = gameEXE;
                             KeyUtil keyUtil = new KeyUtilRDR();
-                            byte[] key = keyUtil.FindKey(gameEXE, "RDR"); //Key is not public yet and must be verified --> I will do this tomorrow.
+                            byte[] key = keyUtil.FindKey(gameEXE, "RDR");
+                            RPFLib.Common.DataUtil.setKey(key);
                             if (!(key == null))
                             {
                                 settingsIni.Write("GamePath", openFolder.SelectedPath);
@@ -93,6 +96,7 @@ namespace RDR_Explorer
             if (openFolder.SelectedPath == "")
             {
                 Application.Exit();
+                return;
             }
             
         }
@@ -121,7 +125,8 @@ namespace RDR_Explorer
                         RageLib.Common.KeyStore.gameEXE = gameEXE;
                         RageLib.Common.KeyUtil.MYgameExe = gameEXE;
                         KeyUtil keyUtil = new KeyUtilRDR();
-                        key = keyUtil.FindKey(gameEXE, "RDR"); //Key is not public yet and must be verified --> I will do this tomorrow.
+                        key = keyUtil.FindKey(gameEXE, "RDR");
+                        RPFLib.Common.DataUtil.setKey(key);
                         if (!(key == null))
                         {
                             settingsIni.Write("GamePath", settingsIni.Read("GamePath"));
@@ -144,30 +149,36 @@ namespace RDR_Explorer
                  }
              }
 
-            statusProgress.ProgressBar.Value = 100;
-            statusLabel.Text = "Key found.";
-            gameDir = settingsIni.Read("GamePath");
-            DirectoryInfo root = new DirectoryInfo(gameDir);
-            PrepareList();
-            if (Directory.Exists(gameDir))
+            if (gameDir != "")
             {
-                try
+                statusProgress.ProgressBar.Value = 100;
+                statusLabel.Text = "Key found.";
+                gameDir = settingsIni.Read("GamePath");
+
+                DirectoryInfo root = new DirectoryInfo(gameDir);
+                PrepareList();
+            
+                if (Directory.Exists(gameDir))
                 {
-                    DirectoryInfo[] directories = root.GetDirectories();
-                    if (directories.Length > 0)
+                    try
                     {
-                        foreach (DirectoryInfo directory in directories)
+                        DirectoryInfo[] directories = root.GetDirectories();
+                        if (directories.Length > 0)
                         {
-                            treeView1.Nodes[0].Nodes.Add(directory.Name, directory.Name, 0, 0);
+                            foreach (DirectoryInfo directory in directories)
+                            {
+                                treeView1.Nodes[0].Nodes.Add(directory.Name, directory.Name, 0, 0);
+                            }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    treeView1.Nodes[0].Expand();
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                treeView1.Nodes[0].Expand();
             }
+            
         }
 
         private void PrepareList()
@@ -280,6 +291,10 @@ namespace RDR_Explorer
                 if(fentry.Extension == ".xex")
                 {
                     iconForFile = RDR_Explorer.Properties.Resources.xex;
+                }
+                else if (fentry.Extension == ".rpf")
+                {
+                    iconForFile = RDR_Explorer.Properties.Resources.rpf;
                 }
                 else if(fentry.Extension == "")
                 {
@@ -395,6 +410,11 @@ namespace RDR_Explorer
                 }
 
             }
+            else if (listView1.SelectedItems[0].ImageKey == ".rpf")
+            {
+                RPFviewer newForm = new RPFviewer(gameDir + @"\" + currHier + listView1.SelectedItems[0].Text, listView1.SelectedItems[0].Text);
+                newForm.Show();
+            }
             else
             {
                 Process.Start(gameDir + @"\" + currHier + @"\" + listView1.SelectedItems[0].Text.ToString());
@@ -403,7 +423,7 @@ namespace RDR_Explorer
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listView1.SelectedItems.Count > 0)
+            if (listView1.SelectedItems.Count > 0 && listView1.FocusedItem != null)
             {
                 openToolStripMenuItem1.Enabled = true;
                 if (listView1.FocusedItem.ImageKey == "????" || listView1.FocusedItem.ImageKey == "???")
@@ -606,7 +626,7 @@ namespace RDR_Explorer
 
         private void inhaltToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("https://github.com/OpenRW");
+            Process.Start("https://github.com/reditec/RDR-Explorer");
         }
 
         private void reportABugToolStripMenuItem_Click(object sender, EventArgs e)
@@ -614,64 +634,90 @@ namespace RDR_Explorer
             Process.Start("http://gtaforums.com/topic/828211-wip-open-source-red-dead-redemption-explorer/");
         }
 
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            About myAboutForm = new About();
+            myAboutForm.ShowDialog();
+        }
 
+        private void suchenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (CheckForInternetConnection())
+            {
+                string url = @"https://raw.githubusercontent.com/reditec/RDR-Explorer/master/Update.ini";
+                // Create an instance of WebClient
+                WebClient client = new WebClient();
+                // Hookup DownloadFileCompleted Event
+                client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
 
-        //private void bgwListBuilder_DoWork(object sender, DoWorkEventArgs e)
-        //{
-        //    try
-        //    {
-        //        using (Cursors.WaitCursor)
-        //        {
-        //            using (BinaryReader s = new BinaryReader(new FileStream(currentFileName, FileMode.Open, FileAccess.Read)))
-        //            {
-        //                char[] Magic = new char[4];
-        //                s.Read(Magic, 0, 4);
-        //                string magicStr = new string(Magic);
-        //                switch (magicStr)
-        //                {
-        //                    case "RPF6":
-        //                        {
-        //                            archiveFile = new Version6();
-        //                            break;
-        //                        }
-        //                    case "RPF3":
-        //                        {
-        //                            archiveFile = new Version3();
-        //                            break;
-        //                        }
-        //                    case "RPF4":
-        //                        {
-        //                            archiveFile = new Version4();
-        //                            break;
-        //                        }
-        //                    case "RPF7":
-        //                        {
-        //                            archiveFile = new Version7();
-        //                            break;
-        //                        }
-        //                    default:
-        //                        MessageBox.Show("Invalid archive selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //                        return;
-        //                }
-        //            }
-        //            archiveFile.Open(currentFileName);
-        //            buildlist(archiveFile.RootDirectory);
-        //            startBreadCrumb(archiveFile.RootDirectory);
-        //        }
-        //        this.Invoke((MethodInvoker)delegate
-        //        {
-        //            Text = Application.ProductName + " - " + new FileInfo(currentFileName).Name;
-        //        });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        this.Invoke((MethodInvoker)delegate
-        //        {
-        //            filelistview.ClearObjects();
-        //            mainStatusbar.ItemLinks.Clear();
-        //            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        });
-        //    }
-        //}
+                // Start the download
+                client.DownloadFileAsync(new Uri(url), "Update.ini");
+            }
+            else
+            {
+
+                MessageBox.Show("We couldn't check for updates. Please check your internet connection.");
+            }
+        }
+
+        //Read result and ask for update
+        void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            IniFile MyIni = new IniFile("Update.ini");
+            if (MyIni.KeyExists("Version") && MyIni.KeyExists("File"))
+            {
+                string ver = MyIni.Read("Version");
+                int xver = Int32.Parse(ver.Replace(".", string.Empty));
+                if (xver > version)
+                {
+                    DialogResult dialogResult = MessageBox.Show("An update is avilable. Perform?","Update found", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        string url = MyIni.Read("File");
+
+                        WebClient client = new WebClient();
+
+                        client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFile2Completed);
+
+                        client.DownloadFileAsync(new Uri(url), "Update.exe");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("You already run the most current version of RDR Explorer.", "No update found");
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Something went wrong.", "Error");
+            }
+        }
+        //Perform update
+        void client_DownloadFile2Completed(object sender, AsyncCompletedEventArgs e)
+        {
+            Process.Start("Update.exe");
+            Application.Exit();
+        }
+
+        public static bool CheckForInternetConnection()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    using (var stream = new System.Net.Sockets.TcpClient("www.google.com", 80))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }
