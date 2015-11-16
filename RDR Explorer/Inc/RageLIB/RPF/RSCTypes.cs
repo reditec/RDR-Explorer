@@ -40,7 +40,6 @@ namespace RDR_Explorer.Inc.RageLIB
             {
                 string[] attributeSplit = attributeString.Split(' ');
                 //index = 2
-                //MessageBox.Show(attributeString);
 
                 finalString = attributeSplit[2].Remove(attributeSplit[2].Length - 1);
 

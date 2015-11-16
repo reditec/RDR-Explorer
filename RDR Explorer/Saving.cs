@@ -45,7 +45,7 @@ namespace RDR_Explorer
             }
             else if (e.Error != null)
             {
-                MessageBox.Show("Failed to save new archive :" + Environment.NewLine + e.Error.ToString());
+                MessageBox.Show("Failed to save new archive :" + Environment.NewLine + e.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {

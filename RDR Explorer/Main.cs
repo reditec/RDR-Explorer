@@ -20,7 +20,15 @@ namespace RDR_Explorer
     {
         public Main()
         {
-            File.Delete("base.bin");
+            if(Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer"))
+            {
+                File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\base.bin");
+                
+            }
+            else
+            {
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer");
+            }            
             //Disable some UI things
             InitializeComponent();
             openToolStripMenuItem1.Enabled = false;
@@ -28,10 +36,15 @@ namespace RDR_Explorer
             copyPathToolStripMenuItem2.Enabled = false;
             propertiesToolStripMenuItem1.Enabled = false;
 
+            if (Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer"))
+            {
+                File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\base.bin");
+            }
         }
 
         public string gameEXE = "";
-        IniFile settingsIni = new IniFile("Settings.ini");
+        
+        IniFile settingsIni = new IniFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\Settings.ini");
         byte[] key = new Byte[0];
         string gameDir = "";
         string currHier = "";
@@ -40,7 +53,6 @@ namespace RDR_Explorer
         string currentPath = "";
         FileInfo[] fileEntries = null; //array for displaying files
         DirectoryInfo[] folderEntries = null; ////array for displaying fodlers
-        int version = 1000001; //version = 1.00 build = 0001
 
         private void CheckExeFile()
         {
@@ -63,16 +75,25 @@ namespace RDR_Explorer
                             RageLib.Common.KeyStore.gameEXE = gameEXE;
                             RageLib.Common.KeyUtil.MYgameExe = gameEXE;
                             KeyUtil keyUtil = new KeyUtilRDR();
-                            byte[] key = keyUtil.FindKey(gameEXE, "RDR");
-                            RPFLib.Common.DataUtil.setKey(key);
-                            if (!(key == null))
+                            if(File.Exists("xextool.exe"))
                             {
-                                settingsIni.Write("GamePath", openFolder.SelectedPath);
+                                byte[] key = keyUtil.FindKey(gameEXE, "RDR");
+                                RPFLib.Common.DataUtil.setKey(key);
+                                if (!(key == null))
+                                {
+                                    settingsIni.Write("GamePath", openFolder.SelectedPath);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("The file default.xex was found, but it seems that this version of the file is not supported or your file is broken. Please try another one." + Environment.NewLine + "Sometimes running RDR Explorer as admin can fix this error, too.", "Executable file not supported", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("The file default.xex was found, but it seems that this version of the file is not supported or your file is broken. Please try another one.", "Executable file not supported", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("Looks like you have deleted the file xextool.exe. Please reinstall RDR Explorer.", "xextool.exe not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                Application.Exit();
                             }
+                            
                         }
                         else
                         {
@@ -102,6 +123,11 @@ namespace RDR_Explorer
         }
         private void Main_Shown(object sender, EventArgs e)
         {
+            if (!(File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\KnownFilenames.txt")))
+            {
+                MessageBox.Show("The AppData folder does not contain the file: KnownFilenames.txt", "KnownFilenames not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
             statusProgress.ProgressBar.Value = 0;
             if (!(settingsIni.KeyExists("FirstLaunch")))
             {
@@ -125,16 +151,24 @@ namespace RDR_Explorer
                         RageLib.Common.KeyStore.gameEXE = gameEXE;
                         RageLib.Common.KeyUtil.MYgameExe = gameEXE;
                         KeyUtil keyUtil = new KeyUtilRDR();
-                        key = keyUtil.FindKey(gameEXE, "RDR");
-                        RPFLib.Common.DataUtil.setKey(key);
-                        if (!(key == null))
+                        if (File.Exists("xextool.exe"))
                         {
-                            settingsIni.Write("GamePath", settingsIni.Read("GamePath"));
+                            key = keyUtil.FindKey(gameEXE, "RDR");
+                            RPFLib.Common.DataUtil.setKey(key);
+                            if (!(key == null))
+                            {
+                                settingsIni.Write("GamePath", settingsIni.Read("GamePath"));
+                            }
+                            else
+                            {
+                                MessageBox.Show("The file default.xex was found, but it seems that this version of the file is not supported or your file is broken. Please try another one.", "Executable file not supported", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                CheckExeFile();
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("The file default.xex was found, but it seems that this version of the file is not supported or your file is broken. Please try another one.", "Executable file not supported", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            CheckExeFile();
+                            MessageBox.Show("Looks like you have deleted the file xextool.exe. Please reinstall RDR Explorer.", "xextool.exe not found");
+                            Application.Exit();
                         }
                     }
                     else
@@ -151,33 +185,41 @@ namespace RDR_Explorer
 
             if (settingsIni.Read("GamePath") != "")
             {
-                statusProgress.ProgressBar.Value = 100;
-                statusLabel.Text = "Key found.";
-                gameDir = settingsIni.Read("GamePath");
+                
+                
+                    
+                    statusProgress.ProgressBar.Value = 100;
+                    statusLabel.Text = "Key found.";
+                    gameDir = settingsIni.Read("GamePath");
 
-                DirectoryInfo root = new DirectoryInfo(gameDir);
-                PrepareList();
-            
-                if (Directory.Exists(gameDir))
-                {
-                    try
+                    DirectoryInfo root = new DirectoryInfo(gameDir);
+                    PrepareList();
+
+                    if (Directory.Exists(gameDir))
                     {
-                        DirectoryInfo[] directories = root.GetDirectories();
-                        if (directories.Length > 0)
+                        try
                         {
-                            foreach (DirectoryInfo directory in directories)
+                            DirectoryInfo[] directories = root.GetDirectories();
+                            if (directories.Length > 0)
                             {
-                                treeView1.Nodes[0].Nodes.Add(directory.Name, directory.Name, 0, 0);
+                                foreach (DirectoryInfo directory in directories)
+                                {
+                                    treeView1.Nodes[0].Nodes.Add(directory.Name, directory.Name, 0, 0);
+                                }
                             }
                         }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        treeView1.Nodes[0].Expand();
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    treeView1.Nodes[0].Expand();
                 }
-            }
+                else
+                {
+                    MessageBox.Show("Try to run the program as admin or change the location of the game files.", "Access denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }              
+            
             
         }
 

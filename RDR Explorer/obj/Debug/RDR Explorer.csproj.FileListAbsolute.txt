@@ -3,7 +3,6 @@ C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR Explorer
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR Explorer.pdb
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Debug\KnownFilenames.txt
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Debug\xextool.exe
-C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Debug\x360_imports.idc
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Debug\RDR Explorer.exe
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Debug\RDR Explorer.pdb
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR Explorer.csprojResolveAssemblyReference.cache

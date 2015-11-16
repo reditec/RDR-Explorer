@@ -37,14 +37,14 @@ namespace RageLib.Common
             
             byte[] key = null;
             ProcessStartInfo startInfo = new ProcessStartInfo("xextool.exe");
-            startInfo.Arguments = "-b base.bin " + "\"" + MYgameExe + "\"";
+            startInfo.Arguments = "-b " +  Path.GetTempPath() + "base.bin " + "\"" + MYgameExe + "\"";
             startInfo.UseShellExecute = false;
             startInfo.CreateNoWindow = true;
             Process BINextractor = Process.Start(startInfo);
             BINextractor.WaitForExit();
-            if(File.Exists("base.bin"))
+            if(File.Exists(Path.GetTempPath() + "\\base.bin "))
             {
-                var fs = new FileStream("base.bin", FileMode.Open, FileAccess.Read);
+                var fs = new FileStream(Path.GetTempPath() + "\\base.bin ", FileMode.Open, FileAccess.Read);
                 foreach (var u in SearchOffsets)
                 {
                     if (u <= fs.Length - 32)
@@ -62,7 +62,7 @@ namespace RageLib.Common
                 }
                 fs.Close();
             }
-            
+            File.Delete(Path.GetTempPath() + "\\base.bin ");
             return key;
         }
     }

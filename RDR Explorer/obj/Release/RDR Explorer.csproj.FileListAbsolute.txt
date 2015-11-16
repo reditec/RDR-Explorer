@@ -1,7 +1,6 @@
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\RDR Explorer.exe.config
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\KnownFilenames.txt
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\xextool.exe
-C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\x360_imports.idc
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\RDR Explorer.exe
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\RDR Explorer.pdb
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Release\RDR Explorer.csprojResolveAssemblyReference.cache

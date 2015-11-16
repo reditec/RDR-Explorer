@@ -23,7 +23,7 @@ namespace RPFLib
 
         public Version6()
         {
-            string s = "KnownFilenames.txt";
+            string s = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\KnownFilenames.txt";
 
             if (s != null)
             {
@@ -209,7 +209,7 @@ namespace RPFLib
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
+                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -174,8 +174,8 @@ namespace RDR_Explorer
         {
             using (BinaryReader s = new BinaryReader(new FileStream(EntirePath, FileMode.Open, FileAccess.Read)))
             {
-                //try
-                //{
+                try
+                {
                     char[] Magic = new char[4];
                     s.Read(Magic, 0, 4);
                     string magicStr = new string(Magic);
@@ -195,15 +195,16 @@ namespace RDR_Explorer
                     archiveFile.Open(EntirePath);
                     buildlist(archiveFile.RootDirectory);
                     //startBreadCrumb(archiveFile.RootDirectory);
-                //}
-                //catch (Exception ex)
-                //{
-                //    this.Invoke((MethodInvoker)delegate
-                //    {
-                //        listView1.Items.Clear();
-                //        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    });
-                //}
+                }
+                catch (Exception ex)
+                {
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        listView1.Items.Clear();
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Application.Exit();
+                   });
+                }
             }
         }
 
@@ -233,7 +234,6 @@ namespace RDR_Explorer
                         if (entry.Name == listView1.SelectedItems[0].Text)
                         {
                             file = entry as RPFLib.Common.File;
-                            //MessageBox.Show("Done");
                         }
                     }
                 }
