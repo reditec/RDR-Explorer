@@ -43,7 +43,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(217, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Version 1.00   Build 1   © Felix Bartling, 2015";
+            this.label1.Text = "Version 1.00   Build 2   © Felix Bartling, 2015";
             // 
             // label2
             // 
