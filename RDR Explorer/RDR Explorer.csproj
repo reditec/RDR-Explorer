@@ -82,6 +82,8 @@
     <Compile Include="Inc\Compression\Lzw\LzwConstants.cs" />
     <Compile Include="Inc\Compression\Lzw\LzwException.cs" />
     <Compile Include="Inc\Compression\Lzw\LzwInputStream.cs" />
+    <Compile Include="Inc\Compression\LZX\EndianStream.cs" />
+    <Compile Include="Inc\Compression\LZX\LZX.cs" />
     <Compile Include="Inc\Compression\SharpZipBaseException.cs" />
     <Compile Include="Inc\Compression\Tar\InvalidHeaderException.cs" />
     <Compile Include="Inc\Compression\Tar\TarArchive.cs" />
@@ -144,7 +146,6 @@
     <Compile Include="Inc\RageLIB\RPF\Common\File.cs" />
     <Compile Include="Inc\RageLIB\RPF\Common\fileSystemObject.cs" />
     <Compile Include="Inc\RageLIB\RPF\Common\Hasher.cs" />
-    <Compile Include="Inc\RageLIB\RPF\Common\xcompress2.cs" />
     <Compile Include="Inc\RageLIB\RPF\RPF6\DirectoryEntry.cs" />
     <Compile Include="Inc\RageLIB\RPF\RPF6\File.cs" />
     <Compile Include="Inc\RageLIB\RPF\RPF6\FileEntry.cs" />
@@ -222,8 +223,14 @@
     </Content>
     <None Include="Resources\icon_RPF.ico" />
     <Content Include="red_dead_redemption_icon_by_flitskikker-d315kze %281%29.ico" />
+    <Content Include="RSCUnpacker.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="xcompress.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="xextool.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup />

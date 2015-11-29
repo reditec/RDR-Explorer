@@ -36,7 +36,8 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.backButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.extrButton = new System.Windows.Forms.ToolStripButton();
+            this.uncompressButton = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.pathLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
@@ -82,7 +83,8 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.backButton,
-            this.toolStripButton2});
+            this.extrButton,
+            this.uncompressButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(712, 25);
@@ -99,15 +101,25 @@
             this.backButton.Text = "Back";
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
-            // toolStripButton2
+            // extrButton
             // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "Extract";
-            this.toolStripButton2.Click += new System.EventHandler(this.extrButton_Click);
+            this.extrButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.extrButton.Image = ((System.Drawing.Image)(resources.GetObject("extrButton.Image")));
+            this.extrButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.extrButton.Name = "extrButton";
+            this.extrButton.Size = new System.Drawing.Size(23, 22);
+            this.extrButton.Text = "Extract";
+            this.extrButton.Click += new System.EventHandler(this.extrButton_Click);
+            // 
+            // uncompressButton
+            // 
+            this.uncompressButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.uncompressButton.Image = ((System.Drawing.Image)(resources.GetObject("uncompressButton.Image")));
+            this.uncompressButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.uncompressButton.Name = "uncompressButton";
+            this.uncompressButton.Size = new System.Drawing.Size(23, 22);
+            this.uncompressButton.Text = "Uncompress file";
+            this.uncompressButton.Click += new System.EventHandler(this.uncompressButton_Click);
             // 
             // statusStrip1
             // 
@@ -154,8 +166,9 @@
         private System.Windows.Forms.ColumnHeader sizeColumn;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton backButton;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton extrButton;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel pathLabel;
+        private System.Windows.Forms.ToolStripButton uncompressButton;
     }
 }

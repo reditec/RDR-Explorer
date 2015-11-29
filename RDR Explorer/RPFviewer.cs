@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using RPFLib;
 using RPFLib.Common;
+using System.Diagnostics;
 
 namespace RDR_Explorer
 {
@@ -237,65 +238,6 @@ namespace RDR_Explorer
                         }
                     }
                 }
-                //returnDir
-                //if(listView1.SelectedItems.)
-                //    var returndirectory = filelistview.SelectedObject as RPFLib.Common.ReturnDir;
-                //    filelistview.ClearObjects();
-                //    buildlist(returndirectory.Tag);
-                //    removeBreadCrumb();
-                //directory
-                    //var directory = filelistview.SelectedObject as RPFLib.Common.Directory;
-                    //filelistview.ClearObjects();
-                    //buildlist(directory);
-                    //addBreadCrumb(directory);
-                //file
-                    //if (currentGame == "rdrXbox")
-                    //{
-                    //    var fileEntry = filelistview.SelectedObject as RPFLib.Common.File;
-                    //    switch (fileEntry.resourcetype)
-                    //    {
-                    //        /*   case 0:
-                    //               {
-                    //                   Viewers.TextView TextViewer = new Viewers.TextView(fileEntry.GetData(true), fileEntry);
-                    //                   TextViewer.ShowDialog();
-                    //                   filelistview.RefreshObjects(masterlist);
-                    //               }
-                    //               break;
-                    //           case 1:
-                    //               {
-                    //                   Viewers.StringsView StringViewer = new Viewers.StringsView(fileEntry.GetData(true));
-                    //                   StringViewer.ShowDialog();
-                    //               }
-                    //               break;
-                    //           case 2:
-                    //               {
-                    //                   Viewers.xscView xscViewer = new Viewers.xscView(fileEntry.GetData(true));
-                    //                   xscViewer.ShowDialog();
-                    //               }
-                    //               break;
-                    //           default:
-                    //               break; */
-                    //    }
-                    //}
-                    //else if (currentGame == "gtaVXbox")
-                    //{
-                    //    /*         var fileEntry = filelistview.SelectedObject as RPFLib.Common.File;
-                    //             switch (Path.GetExtension(fileEntry.Name))
-                    //             {
-                    //                 case "xsc":
-                    //                     {
-                    //                         Viewers.xscViewV7 xscViewer = new Viewers.xscViewV7(fileEntry.GetData(true));
-                    //                         xscViewer.ShowDialog();
-                    //                     }
-                    //                     break;
-                    //                 default:
-                    //                     Viewers.TextView TextViewer = new Viewers.TextView(fileEntry.GetData(true), fileEntry);
-                    //                     TextViewer.ShowDialog();
-                    //                     filelistview.RefreshObjects(masterlist);
-                    //                     break;
-                    //             } */
-                    //}
-                //}
             }
         }
 
@@ -324,29 +266,166 @@ namespace RDR_Explorer
         private void extrButton_Click(object sender, EventArgs e)
         {
             List<fileSystemObject> objectList = new List<fileSystemObject>();
-            if (listView1.SelectedItems.Count == 1)
+            if(listView1.SelectedItems.Count > 1)
             {
+                using (var sfrm = new FolderBrowserDialog())
+                {
+                    if (sfrm.ShowDialog(this) == DialogResult.OK)
+                    {
+                        foreach (ListViewItem myItem in listView1.SelectedItems)
+                        {
+                            RPFLib.Common.File file = new RPFLib.Common.File();
+                            foreach (RPFLib.Common.fileSystemObject entry in masterlist)
+                            {
+                                if (entry.Name == myItem.Text && !(entry.IsDirectory) && !(entry.IsReturnDirectory))
+                                {
+                                    file = entry as RPFLib.Common.File;
 
+                                    byte[] data = file.GetData(false);
+                                    System.IO.File.WriteAllBytes(sfrm.SelectedPath + "\\" + file.Name, data);
 
+                                }
+                            }
+                        }
+                    }                    
+                }
+            }
+            else
+            {
                 using (var sfrm = new SaveFileDialog())
                 {
                     RPFLib.Common.File file = new RPFLib.Common.File();
                     foreach (RPFLib.Common.fileSystemObject entry in masterlist)
                     {
-                        if (entry.Name == listView1.SelectedItems[0].Text && !(entry.IsDirectory) && !(entry.IsReturnDirectory))
+                        if (entry.Name == listView1.SelectedItems[0].Text && !(entry.IsReturnDirectory))
                         {
-                            file = entry as RPFLib.Common.File;
-                            sfrm.FileName = file.Name;
-                            if (sfrm.ShowDialog(this) == DialogResult.OK)
+                            if (entry.IsDirectory)
                             {
-                                byte[] data = file.GetData(false);
-                                System.IO.File.WriteAllBytes(sfrm.FileName, data);
+                                //RPFLib.Common.Directory directory = entry as RPFLib.Common.Directory;
+                                //long longcount = 1;
+                                //do
+                                //{
+                                //    longcount = FolderCount(directory);
+                                //    if (longcount > 0)
+                                //    {
+                                //        foreach (fileSystemObject item in directory)
+                                //        {
+                                //            MessageBox.Show(item.Name);
+                                //        }
+                                //    }
+                                //} while (longcount != 0);
+
+                                
+
+                            }
+                            else
+                            {
+                                file = entry as RPFLib.Common.File;
+                                sfrm.FileName = file.Name;
+                                if (sfrm.ShowDialog(this) == DialogResult.OK)
+                                {
+                                    byte[] data = file.GetData(false);
+                                    System.IO.File.WriteAllBytes(sfrm.FileName, data);
+                                }
                             }
                         }
                     }
+                }
+            }
+            
+        }
 
+        private int FolderCount(RPFLib.Common.Directory directory)
+        {
+            int ctr = 0;
+            foreach(fileSystemObject x in directory)
+            {
+                if (x.IsDirectory)
+                {
+                    ctr++;
+                }                
+            }
+            return ctr;
+        }
+
+        private void uncompressButton_Click(object sender, EventArgs e)
+        {
+            using (var sfrm = new FolderBrowserDialog())
+            {
+                if (sfrm.ShowDialog(this) == DialogResult.OK)
+                {
+                    List<fileSystemObject> objectList = new List<fileSystemObject>();
+                    if (!(System.IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted")))
+                    {
+                        System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted");
+                    }
+                    if (listView1.SelectedItems.Count > 1)
+                    {
+                        foreach (ListViewItem myItem in listView1.SelectedItems)
+                        {
+                            RPFLib.Common.File file = new RPFLib.Common.File();
+                            foreach (RPFLib.Common.fileSystemObject entry in masterlist)
+                            {
+                                if (entry.Name == myItem.Text && !(entry.IsDirectory) && !(entry.IsReturnDirectory))
+                                {
+                                    file = entry as RPFLib.Common.File;
+
+                                    byte[] data = file.GetData(false);
+                                    System.IO.File.WriteAllBytes(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted\\" + file.Name, data);
+                                    ProcessStartInfo startInfo = new ProcessStartInfo("RSCUnpacker.exe");
+                                    startInfo.Arguments = "\"" + Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted\\" + file.Name + "\" -Xbox360";
+                                    startInfo.UseShellExecute = false;
+                                    startInfo.CreateNoWindow = true;
+                                    Process Extractor = Process.Start(startInfo);
+                                    Extractor.WaitForExit();
+                                    System.IO.File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted\\" + file.Name);
+                                    System.IO.DirectoryInfo myDir = new System.IO.DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted\\");
+                                    foreach (System.IO.FileInfo myFile in myDir.GetFiles())
+                                    {
+                                        if (System.IO.File.Exists(sfrm.SelectedPath + "\\" + myFile.Name))
+                                        {
+                                            System.IO.File.Delete(sfrm.SelectedPath + "\\" + myFile.Name);
+                                        }
+                                        myFile.MoveTo(sfrm.SelectedPath + "\\" + myFile.Name);
+                                    }
+                                }
+                            }
+                        }
+
+
+
+                    }
+                    else
+                    {
+                        RPFLib.Common.File file = new RPFLib.Common.File();
+                        foreach (RPFLib.Common.fileSystemObject entry in masterlist)
+                        {
+                            if (entry.Name == listView1.SelectedItems[0].Text && !(entry.IsDirectory) && !(entry.IsReturnDirectory))
+                            {
+                                file = entry as RPFLib.Common.File;
+                                byte[] data = file.GetData(false);
+                                System.IO.File.WriteAllBytes(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted\\" + file.Name, data);
+                                ProcessStartInfo startInfo = new ProcessStartInfo("RSCUnpacker.exe");
+                                startInfo.Arguments = "\"" + Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted\\" + file.Name + "\" -Xbox360";
+                                startInfo.UseShellExecute = false;
+                                startInfo.CreateNoWindow = true;
+                                Process Extractor = Process.Start(startInfo);
+                                Extractor.WaitForExit();
+                                System.IO.File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted\\" + file.Name);
+                                System.IO.DirectoryInfo myDir = new System.IO.DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted\\");
+                                foreach (System.IO.FileInfo myFile in myDir.GetFiles())
+                                {
+                                    if (System.IO.File.Exists(sfrm.SelectedPath + "\\" + myFile.Name))
+                                    {
+                                        System.IO.File.Delete(sfrm.SelectedPath + "\\" + myFile.Name);
+                                    }
+                                    myFile.MoveTo(sfrm.SelectedPath + "\\" + myFile.Name);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
     }
-    }
+ }

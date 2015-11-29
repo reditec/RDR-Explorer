@@ -12,3 +12,5 @@ C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Release\RDR_Explor
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Release\RDR Explorer.csproj.GenerateResource.Cache
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Release\RDR Explorer.exe
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Release\RDR Explorer.pdb
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\xcompress.dll
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\RSCUnpacker.exe
