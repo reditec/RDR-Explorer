@@ -190,7 +190,7 @@ namespace RDR_Explorer
                                 break;
                             }
                         default:
-                            MessageBox.Show("Invalid archive selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(RDR_Explorer.Properties.Resources.ResourceManager.GetString("errInvArch"), RDR_Explorer.Properties.Resources.ResourceManager.GetString("err"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                     }
                     archiveFile.Open(EntirePath);
@@ -202,7 +202,7 @@ namespace RDR_Explorer
                     this.Invoke((MethodInvoker)delegate
                     {
                         listView1.Items.Clear();
-                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Message, RDR_Explorer.Properties.Resources.ResourceManager.GetString("err"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Application.Exit();
                    });
                 }

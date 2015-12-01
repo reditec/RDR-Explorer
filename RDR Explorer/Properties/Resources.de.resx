@@ -118,118 +118,102 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="accDEN" xml:space="preserve">
-    <value>Access denied</value>
+    <value>Zugriff verweigert</value>
   </data>
   <data name="adminFIX" xml:space="preserve">
-    <value>Sometimes running RDR Explorer as admin can fix this error, too.</value>
+    <value>Manchmal hilft es auch RDR Explorer als Admin auszuführen.</value>
   </data>
   <data name="adminREQ" xml:space="preserve">
-    <value>Try to run the program as admin or change the location of the game files.</value>
+    <value>Versuche das Programm als Administrator auszuführen oder den Ort der Spieldateien zu verändern.</value>
   </data>
   <data name="appdTXT" xml:space="preserve">
-    <value>The AppData folder does not contain the file: KnownFilenames.txt</value>
+    <value>Der AppData Ordner enthält nicht die Datei KnownFilenames.txt.</value>
   </data>
   <data name="compr" xml:space="preserve">
-    <value>Compressed</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\shell32_4.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Kmprimiert</value>
   </data>
   <data name="err" xml:space="preserve">
-    <value>Error</value>
+    <value>Fehler</value>
   </data>
   <data name="errInvArch" xml:space="preserve">
-    <value>Invalid archive selected</value>
+    <value>Das Archiv wird nicht unterstützt.</value>
   </data>
   <data name="failSaveArch" xml:space="preserve">
-    <value>Failed to save new archive:</value>
+    <value>Fehler beim Speichern des neuen Archives:</value>
   </data>
   <data name="fErrNoPerm" xml:space="preserve">
-    <value>Could not create a new archive, make sure you have permissions to write to the directory.</value>
+    <value>Das neue Archiv konnte nicht erstellt werden. Möglicherweise hast du nicht ausreichend Berechtigungen.</value>
   </data>
   <data name="fErrOpened" xml:space="preserve">
-    <value>Cannot overwrite the open archive, please choose a different filename.</value>
+    <value>Archivdatei konnte nicht überschrieben werden, bitte wähle einen anderen Dateinamen.</value>
   </data>
   <data name="fErrRPF" xml:space="preserve">
-    <value>Could not open RPF file.</value>
-  </data>
-  <data name="full" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\shell32_235.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Die RPF konnte leider nicht geöffnet werden.</value>
   </data>
   <data name="gtaf" xml:space="preserve">
-    <value>Please report any bugs to the official GTAForums thread</value>
+    <value>Bitte melde alle Bugs im offiziellen GTAForums Thread (englisch).</value>
   </data>
   <data name="keyF" xml:space="preserve">
-    <value>Key found.</value>
+    <value>Key gefunden.</value>
   </data>
   <data name="nfTXT" xml:space="preserve">
-    <value>KnownFilenames not found</value>
-  </data>
-  <data name="noExt" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\shell32_1.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>KnownFilenames nicht gefunden</value>
   </data>
   <data name="none" xml:space="preserve">
-    <value>None</value>
+    <value>Keine</value>
   </data>
   <data name="res" xml:space="preserve">
-    <value>Resource</value>
-  </data>
-  <data name="rpf" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_RPF.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Ressource</value>
   </data>
   <data name="rptbg" xml:space="preserve">
-    <value>(Help -&gt; Report a bug).</value>
+    <value>(Hilfe -&gt; Einen Bug melden).</value>
   </data>
   <data name="selDir" xml:space="preserve">
-    <value>Please select the directory containing</value>
+    <value>Bitte wähle den Ordner mit der Datei</value>
   </data>
   <data name="sfNF" xml:space="preserve">
-    <value>The specified folder was not found!</value>
+    <value>Das gewählte Verzeichnis wurde nicht gefunden</value>
   </data>
   <data name="sfNFtitle" xml:space="preserve">
-    <value>Folder not found</value>
+    <value>Ordner nicht gefunden</value>
   </data>
   <data name="succ" xml:space="preserve">
-    <value>Success</value>
+    <value>Erfolg:</value>
   </data>
   <data name="succArchive" xml:space="preserve">
-    <value>New archive saved successfully.</value>
+    <value>Das neue Archiv wurde erfolgreich angelegt.</value>
   </data>
   <data name="thks" xml:space="preserve">
-    <value>Thank you for installing RDR Explorer.</value>
+    <value>Danke für das Installieren von RDR Explorer.</value>
   </data>
   <data name="UnsuppEX" xml:space="preserve">
-    <value>Executable file not supported</value>
+    <value>Asuführbare Datei wird nicht unterstützt</value>
   </data>
   <data name="UnsuppXEX" xml:space="preserve">
-    <value>The file default.xex was found, but it seems that this version of the file is not supported or your file is broken. Please try another one.</value>
+    <value>Die Datei default.xex wurde zwar gefunden, aber es scheint, als wäre deine Version dieser Datei beschädigt oder zu spezifisch. Sie wird nicht unterstützt. Bitte versuche es erneut mit einer anderen Datei oder schicke mir diese Datei über gtaforums.com.</value>
   </data>
   <data name="ver" xml:space="preserve">
     <value>Version</value>
   </data>
   <data name="welc" xml:space="preserve">
-    <value>Welcome</value>
+    <value>Wilkommen</value>
   </data>
   <data name="wip" xml:space="preserve">
-    <value>RDR Explorer is still a WIP (work in progress) tool.</value>
-  </data>
-  <data name="xex" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\red_dead_redemption_icon_by_flitskikker-d315kze (1).ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>RDR Explorer befindet sich noch in der Entwicklungsphase.</value>
   </data>
   <data name="xexNF" xml:space="preserve">
-    <value>The file default.xex was not found!</value>
+    <value>Die Datei default.xex wurde nicht gefunden!</value>
   </data>
   <data name="xexNFtitle" xml:space="preserve">
-    <value>Executable file not found</value>
+    <value>Ausführbare Datei nicht gefunden</value>
   </data>
   <data name="xexSPEC" xml:space="preserve">
-    <value>Please specify a new directory containing default.xex</value>
+    <value>Bitte wählen Sie eine neues Verzeichnis mit der Datei default.xex</value>
   </data>
   <data name="xextDEL" xml:space="preserve">
-    <value>Looks like you have deleted the file xextool.exe. Please reinstall RDR Explorer.</value>
+    <value>Es scheint, als hättest du xextool.exe entfernt. Bitte installiere RDR Explorer erneut.</value>
   </data>
   <data name="xextNF" xml:space="preserve">
-    <value>xextool.exe not found</value>
+    <value>xextool.exe nicht gefunden</value>
   </data>
 </root>

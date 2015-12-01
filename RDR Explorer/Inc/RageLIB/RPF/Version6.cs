@@ -47,7 +47,7 @@ namespace RPFLib
             int filecount = _rpfFile.Open(filename);
             if (filecount < 1)
             {
-                throw new Exception("Could not open RPF file.");
+                throw new Exception(RDR_Explorer.Properties.Resources.ResourceManager.GetString("fErrRPF"));
             }
             BuildFS();
         }
@@ -189,19 +189,19 @@ namespace RPFLib
                         StringBuilder attributes = new StringBuilder();
                         if (file.IsResource)
                         {
-                            attributes.Append(string.Format("Resource [Version {0}", fileEntry.ResourceType));
+                            attributes.Append(string.Format(RDR_Explorer.Properties.Resources.ResourceManager.GetString("res") + " [" + RDR_Explorer.Properties.Resources.ResourceManager.GetString("ver") + "{0}", fileEntry.ResourceType));
                             if (file.IsCompressed)
                             {
-                                attributes.Append(", Compressed");
+                                attributes.Append(", " + RDR_Explorer.Properties.Resources.ResourceManager.GetString("compr"));
                             }
                             attributes.Append("]");
                         }
                         else if (file.IsCompressed)
                         {
-                            attributes.Append("Compressed");
+                            attributes.Append(RDR_Explorer.Properties.Resources.ResourceManager.GetString("compr"));
                         }
                         else
-                            attributes.Append("None");
+                            attributes.Append(RDR_Explorer.Properties.Resources.ResourceManager.GetString("none"));
                         file.Attributes = attributes.ToString();
                         fsDirectory.AddObject(file);
                     }
@@ -209,7 +209,7 @@ namespace RPFLib
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, RDR_Explorer.Properties.Resources.ResourceManager.GetString("err"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -262,7 +262,7 @@ namespace RPFLib
                 {
                     if (sfrm.FileName == streamfilename)
                     {
-                        MessageBox.Show("Cannot overwrite the open archive, please choose a different filename.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(RDR_Explorer.Properties.Resources.ResourceManager.GetString("fErrOpened"), RDR_Explorer.Properties.Resources.ResourceManager.GetString("err"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Save();
                         return;
                     }
@@ -276,7 +276,7 @@ namespace RPFLib
                     }
                     catch
                     {
-                        MessageBox.Show("Could not create a new archive, make sure you have permissions to write to the directory.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(RDR_Explorer.Properties.Resources.ResourceManager.GetString("fErrNoPerm"), RDR_Explorer.Properties.Resources.ResourceManager.GetString("err"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     /*

@@ -46,33 +46,28 @@
             // 
             // listView1
             // 
+            resources.ApplyResources(this.listView1, "listView1");
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.nameColumn,
             this.typeColumn,
             this.sizeColumn});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(0, 25);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(712, 447);
-            this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
             // 
             // nameColumn
             // 
-            this.nameColumn.Text = "Name";
-            this.nameColumn.Width = 119;
+            resources.ApplyResources(this.nameColumn, "nameColumn");
             // 
             // typeColumn
             // 
-            this.typeColumn.Text = "Type";
-            this.typeColumn.Width = 198;
+            resources.ApplyResources(this.typeColumn, "typeColumn");
             // 
             // sizeColumn
             // 
-            this.sizeColumn.Text = "Size";
+            resources.ApplyResources(this.sizeColumn, "sizeColumn");
             // 
             // backgroundWorker1
             // 
@@ -81,72 +76,54 @@
             // 
             // toolStrip1
             // 
+            resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.backButton,
             this.extrButton,
             this.uncompressButton});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(712, 25);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
             // 
             // backButton
             // 
+            resources.ApplyResources(this.backButton, "backButton");
             this.backButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.backButton.Image = ((System.Drawing.Image)(resources.GetObject("backButton.Image")));
-            this.backButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(23, 22);
-            this.backButton.Text = "Back";
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // extrButton
             // 
+            resources.ApplyResources(this.extrButton, "extrButton");
             this.extrButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.extrButton.Image = ((System.Drawing.Image)(resources.GetObject("extrButton.Image")));
-            this.extrButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.extrButton.Name = "extrButton";
-            this.extrButton.Size = new System.Drawing.Size(23, 22);
-            this.extrButton.Text = "Extract";
             this.extrButton.Click += new System.EventHandler(this.extrButton_Click);
             // 
             // uncompressButton
             // 
+            resources.ApplyResources(this.uncompressButton, "uncompressButton");
             this.uncompressButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.uncompressButton.Image = ((System.Drawing.Image)(resources.GetObject("uncompressButton.Image")));
-            this.uncompressButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.uncompressButton.Name = "uncompressButton";
-            this.uncompressButton.Size = new System.Drawing.Size(23, 22);
-            this.uncompressButton.Text = "Uncompress file";
             this.uncompressButton.Click += new System.EventHandler(this.uncompressButton_Click);
             // 
             // statusStrip1
             // 
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pathLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 472);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(712, 22);
-            this.statusStrip1.TabIndex = 2;
-            this.statusStrip1.Text = "statusStrip1";
             // 
             // pathLabel
             // 
+            resources.ApplyResources(this.pathLabel, "pathLabel");
             this.pathLabel.Name = "pathLabel";
-            this.pathLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // RPFviewer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(712, 494);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RPFviewer";
-            this.Text = "Red Dead Redemption Explorer - RPF viewer";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RPFviewer_FormClosed);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

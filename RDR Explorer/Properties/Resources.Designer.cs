@@ -61,12 +61,111 @@ namespace RDR_Explorer.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Access denied ähnelt.
+        /// </summary>
+        internal static string accDEN {
+            get {
+                return ResourceManager.GetString("accDEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sometimes running RDR Explorer as admin can fix this error, too. ähnelt.
+        /// </summary>
+        internal static string adminFIX {
+            get {
+                return ResourceManager.GetString("adminFIX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Try to run the program as admin or change the location of the game files. ähnelt.
+        /// </summary>
+        internal static string adminREQ {
+            get {
+                return ResourceManager.GetString("adminREQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The AppData folder does not contain the file: KnownFilenames.txt ähnelt.
+        /// </summary>
+        internal static string appdTXT {
+            get {
+                return ResourceManager.GetString("appdTXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Compressed ähnelt.
+        /// </summary>
+        internal static string compr {
+            get {
+                return ResourceManager.GetString("compr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
         /// </summary>
         internal static System.Drawing.Icon empty {
             get {
                 object obj = ResourceManager.GetObject("empty", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Error ähnelt.
+        /// </summary>
+        internal static string err {
+            get {
+                return ResourceManager.GetString("err", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Invalid archive selected ähnelt.
+        /// </summary>
+        internal static string errInvArch {
+            get {
+                return ResourceManager.GetString("errInvArch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Failed to save new archive: ähnelt.
+        /// </summary>
+        internal static string failSaveArch {
+            get {
+                return ResourceManager.GetString("failSaveArch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Could not create a new archive, make sure you have permissions to write to the directory. ähnelt.
+        /// </summary>
+        internal static string fErrNoPerm {
+            get {
+                return ResourceManager.GetString("fErrNoPerm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Cannot overwrite the open archive, please choose a different filename. ähnelt.
+        /// </summary>
+        internal static string fErrOpened {
+            get {
+                return ResourceManager.GetString("fErrOpened", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Could not open RPF file. ähnelt.
+        /// </summary>
+        internal static string fErrRPF {
+            get {
+                return ResourceManager.GetString("fErrRPF", resourceCulture);
             }
         }
         
@@ -81,12 +180,57 @@ namespace RDR_Explorer.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please report any bugs to the official GTAForums thread ähnelt.
+        /// </summary>
+        internal static string gtaf {
+            get {
+                return ResourceManager.GetString("gtaf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Key found. ähnelt.
+        /// </summary>
+        internal static string keyF {
+            get {
+                return ResourceManager.GetString("keyF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die KnownFilenames not found ähnelt.
+        /// </summary>
+        internal static string nfTXT {
+            get {
+                return ResourceManager.GetString("nfTXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
         /// </summary>
         internal static System.Drawing.Icon noExt {
             get {
                 object obj = ResourceManager.GetObject("noExt", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die None ähnelt.
+        /// </summary>
+        internal static string none {
+            get {
+                return ResourceManager.GetString("none", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Resource ähnelt.
+        /// </summary>
+        internal static string res {
+            get {
+                return ResourceManager.GetString("res", resourceCulture);
             }
         }
         
@@ -101,12 +245,165 @@ namespace RDR_Explorer.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die (Help -&gt; Report a bug). ähnelt.
+        /// </summary>
+        internal static string rptbg {
+            get {
+                return ResourceManager.GetString("rptbg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please select the directory containing ähnelt.
+        /// </summary>
+        internal static string selDir {
+            get {
+                return ResourceManager.GetString("selDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The specified folder was not found! ähnelt.
+        /// </summary>
+        internal static string sfNF {
+            get {
+                return ResourceManager.GetString("sfNF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Folder not found ähnelt.
+        /// </summary>
+        internal static string sfNFtitle {
+            get {
+                return ResourceManager.GetString("sfNFtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Success ähnelt.
+        /// </summary>
+        internal static string succ {
+            get {
+                return ResourceManager.GetString("succ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die New archive saved successfully. ähnelt.
+        /// </summary>
+        internal static string succArchive {
+            get {
+                return ResourceManager.GetString("succArchive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Thank you for installing RDR Explorer. ähnelt.
+        /// </summary>
+        internal static string thks {
+            get {
+                return ResourceManager.GetString("thks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Executable file not supported ähnelt.
+        /// </summary>
+        internal static string UnsuppEX {
+            get {
+                return ResourceManager.GetString("UnsuppEX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The file default.xex was found, but it seems that this version of the file is not supported or your file is broken. Please try another one. ähnelt.
+        /// </summary>
+        internal static string UnsuppXEX {
+            get {
+                return ResourceManager.GetString("UnsuppXEX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Version ähnelt.
+        /// </summary>
+        internal static string ver {
+            get {
+                return ResourceManager.GetString("ver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Welcome ähnelt.
+        /// </summary>
+        internal static string welc {
+            get {
+                return ResourceManager.GetString("welc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die RDR Explorer is still a WIP (work in progress) tool. ähnelt.
+        /// </summary>
+        internal static string wip {
+            get {
+                return ResourceManager.GetString("wip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
         /// </summary>
         internal static System.Drawing.Icon xex {
             get {
                 object obj = ResourceManager.GetObject("xex", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The file default.xex was not found! ähnelt.
+        /// </summary>
+        internal static string xexNF {
+            get {
+                return ResourceManager.GetString("xexNF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Executable file not found ähnelt.
+        /// </summary>
+        internal static string xexNFtitle {
+            get {
+                return ResourceManager.GetString("xexNFtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please specify a new directory containing default.xex ähnelt.
+        /// </summary>
+        internal static string xexSPEC {
+            get {
+                return ResourceManager.GetString("xexSPEC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Looks like you have deleted the file xextool.exe. Please reinstall RDR Explorer. ähnelt.
+        /// </summary>
+        internal static string xextDEL {
+            get {
+                return ResourceManager.GetString("xextDEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die xextool.exe not found ähnelt.
+        /// </summary>
+        internal static string xextNF {
+            get {
+                return ResourceManager.GetString("xextNF", resourceCulture);
             }
         }
     }

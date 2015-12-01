@@ -1,6 +1,5 @@
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\RDR Explorer.exe.config
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\KnownFilenames.txt
-C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\xextool.exe
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\RDR Explorer.exe
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\RDR Explorer.pdb
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Release\RDR Explorer.csprojResolveAssemblyReference.cache
@@ -14,3 +13,10 @@ C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Release\RDR Explor
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Release\RDR Explorer.pdb
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\xcompress.dll
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\RSCUnpacker.exe
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\de\RDR Explorer.resources.dll
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Release\RDR_Explorer.About.de.resources
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Release\RDR_Explorer.Main.de.resources
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Release\RDR_Explorer.RPFviewer.de.resources
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Release\de\RDR Explorer.resources.dll
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Release\RDR_Explorer.Properties.Resources.de.resources
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\xextool.exe

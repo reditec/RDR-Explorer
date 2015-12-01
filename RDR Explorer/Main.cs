@@ -61,7 +61,7 @@ namespace RDR_Explorer
             {
 
 
-                openFolder.Description = "Please select the directory containing default.xex.";
+                openFolder.Description = RDR_Explorer.Properties.Resources.ResourceManager.GetString("selDir") + " " + "default.xex.";
 
                 DialogResult dr = openFolder.ShowDialog();
                 if (dr == DialogResult.OK)
@@ -85,24 +85,24 @@ namespace RDR_Explorer
                                 }
                                 else
                                 {
-                                    MessageBox.Show("The file default.xex was found, but it seems that this version of the file is not supported or your file is broken. Please try another one." + Environment.NewLine + "Sometimes running RDR Explorer as admin can fix this error, too.", "Executable file not supported", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show(RDR_Explorer.Properties.Resources.ResourceManager.GetString("UnsuppXEX")  + Environment.NewLine + RDR_Explorer.Properties.Resources.ResourceManager.GetString("adminFIX"), Environment.NewLine + RDR_Explorer.Properties.Resources.ResourceManager.GetString("UnsuppEX"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("Looks like you have deleted the file xextool.exe. Please reinstall RDR Explorer.", "xextool.exe not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(RDR_Explorer.Properties.Resources.ResourceManager.GetString("xextDEL"), RDR_Explorer.Properties.Resources.ResourceManager.GetString("xextNF"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 Application.Exit();
                             }
                             
                         }
                         else
                         {
-                            MessageBox.Show("The file default.xex was not found!" + Environment.NewLine + "Please specify a new directory containing default.xex", "Executable file not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(RDR_Explorer.Properties.Resources.ResourceManager.GetString("xexNF") + Environment.NewLine + RDR_Explorer.Properties.Resources.ResourceManager.GetString("xexSPEC"), RDR_Explorer.Properties.Resources.ResourceManager.GetString("xexNFtitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("The specified folder was not found!" + Environment.NewLine + "Please specify a new directory containing default.xex", "Folder not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(RDR_Explorer.Properties.Resources.ResourceManager.GetString("sfNF") + Environment.NewLine + RDR_Explorer.Properties.Resources.ResourceManager.GetString("xexSPEC"), RDR_Explorer.Properties.Resources.ResourceManager.GetString("sfNFtitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
                     
@@ -125,13 +125,13 @@ namespace RDR_Explorer
         {
             if (!(File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\KnownFilenames.txt")))
             {
-                MessageBox.Show("The AppData folder does not contain the file: KnownFilenames.txt", "KnownFilenames not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(RDR_Explorer.Properties.Resources.ResourceManager.GetString("appdTXT"), RDR_Explorer.Properties.Resources.ResourceManager.GetString("nfTXT"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
             statusProgress.ProgressBar.Value = 0;
             if (!(settingsIni.KeyExists("FirstLaunch")))
             {
-                MessageBox.Show("Thank you for installing RDR Explorer." + Environment.NewLine + "RDR Explorer is still a WIP (work in progress) tool." + Environment.NewLine + "Please report any bugs to the official GTAForums thread" + Environment.NewLine + "(Help -> Report a bug).", "Welcome", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(RDR_Explorer.Properties.Resources.ResourceManager.GetString("thks") + Environment.NewLine + RDR_Explorer.Properties.Resources.ResourceManager.GetString("wip") + Environment.NewLine + RDR_Explorer.Properties.Resources.ResourceManager.GetString("gtaf") + Environment.NewLine + RDR_Explorer.Properties.Resources.ResourceManager.GetString("rptbg"), RDR_Explorer.Properties.Resources.ResourceManager.GetString("welc"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 settingsIni.Write("FirstLaunch", "true");
             }
             if (!(settingsIni.KeyExists("GamePath")))
@@ -161,24 +161,24 @@ namespace RDR_Explorer
                             }
                             else
                             {
-                                MessageBox.Show("The file default.xex was found, but it seems that this version of the file is not supported or your file is broken. Please try another one.", "Executable file not supported", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(RDR_Explorer.Properties.Resources.ResourceManager.GetString("UnsuppXEX") + Environment.NewLine + RDR_Explorer.Properties.Resources.ResourceManager.GetString("adminFIX"), RDR_Explorer.Properties.Resources.ResourceManager.GetString("UnsuppEX"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 CheckExeFile();
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Looks like you have deleted the file xextool.exe. Please reinstall RDR Explorer.", "xextool.exe not found");
+                            MessageBox.Show(RDR_Explorer.Properties.Resources.ResourceManager.GetString("xextDEL"), RDR_Explorer.Properties.Resources.ResourceManager.GetString("xextNF"));
                             Application.Exit();
                         }
                     }
                     else
                     {
-                        MessageBox.Show("The specified folder was not found!" + Environment.NewLine + "Please specify a new directory containing default.xex", "Folder not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(RDR_Explorer.Properties.Resources.ResourceManager.GetString("sfNF") + Environment.NewLine + RDR_Explorer.Properties.Resources.ResourceManager.GetString("xexSPEC"), RDR_Explorer.Properties.Resources.ResourceManager.GetString("sfNFtitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                  }
                  else
                  {
-                        MessageBox.Show("The file default.xex was not found!" + Environment.NewLine + "Please specify a new directory containing default.xex", "Executable file not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(RDR_Explorer.Properties.Resources.ResourceManager.GetString("xexNF") + Environment.NewLine + RDR_Explorer.Properties.Resources.ResourceManager.GetString("xexSPEC"), RDR_Explorer.Properties.Resources.ResourceManager.GetString("xexNFtitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         CheckExeFile();
                  }
              }
@@ -189,7 +189,7 @@ namespace RDR_Explorer
                 
                     
                     statusProgress.ProgressBar.Value = 100;
-                    statusLabel.Text = "Key found.";
+                    statusLabel.Text = RDR_Explorer.Properties.Resources.ResourceManager.GetString("keyF");
                     gameDir = settingsIni.Read("GamePath");
 
                     DirectoryInfo root = new DirectoryInfo(gameDir);
@@ -210,14 +210,14 @@ namespace RDR_Explorer
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(ex.Message, RDR_Explorer.Properties.Resources.ResourceManager.GetString("err"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         treeView1.Nodes[0].Expand();
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Try to run the program as admin or change the location of the game files.", "Access denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(RDR_Explorer.Properties.Resources.ResourceManager.GetString("adminREQ"), RDR_Explorer.Properties.Resources.ResourceManager.GetString("accDEN"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }              
             
             

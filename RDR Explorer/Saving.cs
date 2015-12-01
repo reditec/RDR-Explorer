@@ -45,12 +45,12 @@ namespace RDR_Explorer
             }
             else if (e.Error != null)
             {
-                MessageBox.Show("Failed to save new archive :" + Environment.NewLine + e.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(RDR_Explorer.Properties.Resources.ResourceManager.GetString("failSaveArch")  + Environment.NewLine + e.Error.ToString(), RDR_Explorer.Properties.Resources.ResourceManager.GetString("err"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
                 this.Hide();
-                MessageBox.Show("New archive saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(RDR_Explorer.Properties.Resources.ResourceManager.GetString("succArchive"), RDR_Explorer.Properties.Resources.ResourceManager.GetString("succ"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             this.Invoke(new MethodInvoker(delegate { this.Close(); }));
         }
