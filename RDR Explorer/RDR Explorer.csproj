@@ -206,6 +206,9 @@
     <EmbeddedResource Include="RPFviewer.resx">
       <DependentUpon>RPFviewer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Saving.de.resx">
+      <DependentUpon>Saving.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Saving.resx">
       <DependentUpon>Saving.cs</DependentUpon>
     </EmbeddedResource>

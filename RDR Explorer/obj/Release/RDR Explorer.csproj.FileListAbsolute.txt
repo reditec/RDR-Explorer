@@ -20,3 +20,4 @@ C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Release\RDR_Explor
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Release\de\RDR Explorer.resources.dll
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Release\RDR_Explorer.Properties.Resources.de.resources
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Release\xextool.exe
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Release\RDR_Explorer.Saving.de.resources

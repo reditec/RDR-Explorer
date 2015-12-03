@@ -97,15 +97,6 @@ namespace RDR_Explorer.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Compressed ähnelt.
-        /// </summary>
-        internal static string compr {
-            get {
-                return ResourceManager.GetString("compr", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
         /// </summary>
         internal static System.Drawing.Icon empty {
@@ -222,15 +213,6 @@ namespace RDR_Explorer.Properties {
         internal static string none {
             get {
                 return ResourceManager.GetString("none", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Resource ähnelt.
-        /// </summary>
-        internal static string res {
-            get {
-                return ResourceManager.GetString("res", resourceCulture);
             }
         }
         

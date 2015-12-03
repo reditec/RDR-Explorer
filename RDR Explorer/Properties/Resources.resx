@@ -129,9 +129,6 @@
   <data name="appdTXT" xml:space="preserve">
     <value>The AppData folder does not contain the file: KnownFilenames.txt</value>
   </data>
-  <data name="compr" xml:space="preserve">
-    <value>Compressed</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\shell32_4.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -171,9 +168,6 @@
   </data>
   <data name="none" xml:space="preserve">
     <value>None</value>
-  </data>
-  <data name="res" xml:space="preserve">
-    <value>Resource</value>
   </data>
   <data name="rpf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_RPF.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

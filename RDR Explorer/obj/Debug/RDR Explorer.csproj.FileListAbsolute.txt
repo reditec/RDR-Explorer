@@ -27,7 +27,12 @@ C:\Users\redit\Documents\GitHub\RDR-Explorer\source\RDR Explorer\obj\Debug\RDR_E
 C:\Users\redit\Documents\GitHub\RDR-Explorer\source\RDR Explorer\obj\Debug\RDR_Explorer.Saving.resources
 C:\Users\redit\Documents\GitHub\RDR-Explorer\source\RDR Explorer\obj\Debug\RDR Explorer.csproj.GenerateResource.Cache
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Debug\xcompress.dll
-C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Debug\Saving.resx
-C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Debug\Saving.cs
-C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Debug\Saving.Designer.cs
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR Explorer.csprojResolveAssemblyReference.cache
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Debug\RSCUnpacker.exe
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Debug\de\RDR Explorer.resources.dll
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR_Explorer.About.de.resources
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR_Explorer.Main.de.resources
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR_Explorer.Properties.Resources.de.resources
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR_Explorer.RPFviewer.de.resources
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR_Explorer.Saving.de.resources
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\de\RDR Explorer.resources.dll

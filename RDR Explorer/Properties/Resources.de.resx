@@ -129,9 +129,6 @@
   <data name="appdTXT" xml:space="preserve">
     <value>Der AppData Ordner enthält nicht die Datei KnownFilenames.txt.</value>
   </data>
-  <data name="compr" xml:space="preserve">
-    <value>Kmprimiert</value>
-  </data>
   <data name="err" xml:space="preserve">
     <value>Fehler</value>
   </data>
@@ -161,9 +158,6 @@
   </data>
   <data name="none" xml:space="preserve">
     <value>Keine</value>
-  </data>
-  <data name="res" xml:space="preserve">
-    <value>Ressource</value>
   </data>
   <data name="rptbg" xml:space="preserve">
     <value>(Hilfe -&gt; Einen Bug melden).</value>

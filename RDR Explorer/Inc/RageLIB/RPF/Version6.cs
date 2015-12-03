@@ -189,19 +189,19 @@ namespace RPFLib
                         StringBuilder attributes = new StringBuilder();
                         if (file.IsResource)
                         {
-                            attributes.Append(string.Format(RDR_Explorer.Properties.Resources.ResourceManager.GetString("res") + " [" + RDR_Explorer.Properties.Resources.ResourceManager.GetString("ver") + "{0}", fileEntry.ResourceType));
+                            attributes.Append(string.Format("Resource [Version {0}", fileEntry.ResourceType));
                             if (file.IsCompressed)
                             {
-                                attributes.Append(", " + RDR_Explorer.Properties.Resources.ResourceManager.GetString("compr"));
+                                attributes.Append(", Compressed");
                             }
                             attributes.Append("]");
                         }
                         else if (file.IsCompressed)
                         {
-                            attributes.Append(RDR_Explorer.Properties.Resources.ResourceManager.GetString("compr"));
+                            attributes.Append("Compressed");
                         }
                         else
-                            attributes.Append(RDR_Explorer.Properties.Resources.ResourceManager.GetString("none"));
+                            attributes.Append("None");
                         file.Attributes = attributes.ToString();
                         fsDirectory.AddObject(file);
                     }
