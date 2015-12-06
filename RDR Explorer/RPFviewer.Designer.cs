@@ -37,6 +37,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.backButton = new System.Windows.Forms.ToolStripButton();
             this.extrButton = new System.Windows.Forms.ToolStripButton();
+            this.extrAllButton = new System.Windows.Forms.ToolStripButton();
             this.uncompressButton = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.pathLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -80,6 +81,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.backButton,
             this.extrButton,
+            this.extrAllButton,
             this.uncompressButton});
             this.toolStrip1.Name = "toolStrip1";
             // 
@@ -96,6 +98,13 @@
             this.extrButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.extrButton.Name = "extrButton";
             this.extrButton.Click += new System.EventHandler(this.extrButton_Click);
+            // 
+            // extrAllButton
+            // 
+            resources.ApplyResources(this.extrAllButton, "extrAllButton");
+            this.extrAllButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.extrAllButton.Name = "extrAllButton";
+            this.extrAllButton.Click += new System.EventHandler(this.extrAllButton_Click);
             // 
             // uncompressButton
             // 
@@ -147,5 +156,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel pathLabel;
         private System.Windows.Forms.ToolStripButton uncompressButton;
+        private System.Windows.Forms.ToolStripButton extrAllButton;
     }
 }

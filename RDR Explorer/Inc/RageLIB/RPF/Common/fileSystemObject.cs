@@ -31,5 +31,7 @@ namespace RPFLib.Common
         public abstract uint nameHash { get; set; }
         public abstract bool IsDirectory { get; }
         public abstract bool IsReturnDirectory { get; }
+        public abstract bool ContainsSubfolder { get; }
+        public abstract string[] ReturnSubfolderNames { get; }
     }
 }

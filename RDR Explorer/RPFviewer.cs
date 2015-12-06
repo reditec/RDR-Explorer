@@ -16,6 +16,7 @@ namespace RDR_Explorer
 {
     public partial class RPFviewer : Form
     {
+        string extrPath = null;
         string EntirePath = null;
         string fileName = null;
         private Archive archiveFile;
@@ -263,27 +264,54 @@ namespace RDR_Explorer
             
         }
 
+        public void BrowseHier(RPFLib.Common.Directory dir, RPFLib.Common.Directory rDir)
+        {
+            foreach (RPFLib.Common.fileSystemObject d in dir)
+            {
+                if(d.IsDirectory)
+                {
+                    BrowseHier(d as RPFLib.Common.Directory, rDir);
+                    System.IO.Directory.CreateDirectory(extrPath + "\\" + rDir.Name + "\\" + d.FullName.Replace(rDir.FullName + "\\", ""));
+                }
+                else
+                {
+                    RPFLib.Common.File file = d as RPFLib.Common.File;
+                    byte[] data = file.GetData(false);
+                    if (!(System.IO.Directory.Exists(extrPath + "\\" + rDir.Name + "\\" + file.FullName.Replace(rDir.FullName + "\\", "").Replace(file.Name, ""))))
+                        System.IO.Directory.CreateDirectory(extrPath + "\\" + rDir.Name + "\\" + file.FullName.Replace(rDir.FullName + "\\", "").Replace(file.Name, ""));
+                    System.IO.File.WriteAllBytes(extrPath + "\\" + rDir.Name + "\\" + file.FullName.Replace(rDir.FullName + "\\", "") , data);
+                }
+            }
+            
+        }
+
         private void extrButton_Click(object sender, EventArgs e)
         {
-            List<fileSystemObject> objectList = new List<fileSystemObject>();
             if(listView1.SelectedItems.Count > 1)
             {
                 using (var sfrm = new FolderBrowserDialog())
                 {
                     if (sfrm.ShowDialog(this) == DialogResult.OK)
                     {
+                        extrPath = sfrm.SelectedPath;
                         foreach (ListViewItem myItem in listView1.SelectedItems)
                         {
-                            RPFLib.Common.File file = new RPFLib.Common.File();
                             foreach (RPFLib.Common.fileSystemObject entry in masterlist)
                             {
-                                if (entry.Name == myItem.Text && !(entry.IsDirectory) && !(entry.IsReturnDirectory))
+                                if (entry.Name == myItem.Text)
                                 {
-                                    file = entry as RPFLib.Common.File;
-
-                                    byte[] data = file.GetData(false);
-                                    System.IO.File.WriteAllBytes(sfrm.SelectedPath + "\\" + file.Name, data);
-
+                                    if (entry.IsDirectory)
+                                    {
+                                        RPFLib.Common.Directory dir = entry as RPFLib.Common.Directory;
+                                        System.IO.Directory.CreateDirectory(extrPath+ "\\" + dir.Name);
+                                        BrowseHier(dir, dir);
+                                    }
+                                    else
+                                    {
+                                        RPFLib.Common.File file = entry as RPFLib.Common.File;
+                                        byte[] data = file.GetData(false);
+                                        System.IO.File.WriteAllBytes(sfrm.SelectedPath + "\\" + file.Name, data);
+                                    }
                                 }
                             }
                         }
@@ -335,6 +363,7 @@ namespace RDR_Explorer
             
         }
 
+        
         private int FolderCount(RPFLib.Common.Directory directory)
         {
             int ctr = 0;
@@ -422,6 +451,32 @@ namespace RDR_Explorer
                                     myFile.MoveTo(sfrm.SelectedPath + "\\" + myFile.Name);
                                 }
                             }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void extrAllButton_Click(object sender, EventArgs e)
+        {
+            using (var sfrm = new FolderBrowserDialog())
+            {
+                if (sfrm.ShowDialog(this) == DialogResult.OK)
+                {
+                    extrPath = sfrm.SelectedPath;
+                    foreach (RPFLib.Common.fileSystemObject entry in masterlist)
+                    {
+                        if (entry.IsDirectory)
+                        {
+                            RPFLib.Common.Directory dir = entry as RPFLib.Common.Directory;
+                            System.IO.Directory.CreateDirectory(extrPath + "\\" + dir.Name);
+                            BrowseHier(dir, dir);
+                        }
+                        else
+                        {
+                            RPFLib.Common.File file = entry as RPFLib.Common.File;
+                            byte[] data = file.GetData(false);
+                            System.IO.File.WriteAllBytes(sfrm.SelectedPath + "\\" + file.Name, data);
                         }
                     }
                 }

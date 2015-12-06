@@ -32,6 +32,22 @@ namespace RPFLib.Common
             _Index = newIndex;
         }
 
+        public override bool ContainsSubfolder
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public override string[] ReturnSubfolderNames
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public override bool IsDirectory
         {
             get { return false; }

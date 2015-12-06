@@ -26,6 +26,51 @@ namespace RPFLib.Common
             get { return true; }
         }
 
+        public override bool ContainsSubfolder
+        {
+            get
+            {
+                int ctr = 0;
+                foreach (fileSystemObject x in this)
+                {
+                    if (x.IsDirectory)
+                    {
+                        ctr++;
+                    }
+                }
+                if (ctr > 0)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        public override string[] ReturnSubfolderNames
+        {
+            get
+            {
+                int ctr = 0;
+                foreach (fileSystemObject x in this)
+                {
+                    if (x.IsDirectory)
+                    {
+                        ctr++;
+                    }
+                }
+                string[] myArray = new string[ctr];
+                ctr = 0;
+                foreach (fileSystemObject x in this)
+                {
+                    if (x.IsDirectory)
+                    {
+                        myArray[ctr] = x.Name;
+                        ctr++;
+                    }
+                }
+                return myArray;
+            }
+        }
+
         public override bool IsReturnDirectory
         {
             get { return false; }
