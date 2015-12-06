@@ -36,3 +36,10 @@ C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR_Explorer
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR_Explorer.RPFviewer.de.resources
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR_Explorer.Saving.de.resources
 C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\de\RDR Explorer.resources.dll
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\bin\Debug\zh\RDR Explorer.resources.dll
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR_Explorer.About.zh.resources
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR_Explorer.Main.zh.resources
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR_Explorer.Properties.Resources.zh.resources
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR_Explorer.RPFviewer.zh.resources
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\RDR_Explorer.Saving.zh.resources
+C:\Users\redit\Documents\GitHub\RDR-Explorer\RDR Explorer\obj\Debug\zh\RDR Explorer.resources.dll
