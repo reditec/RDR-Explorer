@@ -177,10 +177,10 @@ namespace RPFLib.RPF6
 
         public byte[] ReadData(long offset, int length)
         {
-            var buffer = new byte[length];
-            _stream.Seek(offset, SeekOrigin.Begin);
-            _stream.Read(buffer, 0, length);
-            return buffer;
+                var buffer = new byte[length];
+                _stream.Seek(offset, SeekOrigin.Begin);
+                _stream.Read(buffer, 0, length);
+                return buffer;
         }
 
     }

@@ -16,6 +16,8 @@ namespace RDR_Explorer
 {
     public partial class RPFviewer : Form
     {
+        int countOfFiles = 0;
+        int currentCount = 0;
         string extrPath = null;
         string EntirePath = null;
         string fileName = null;
@@ -205,7 +207,7 @@ namespace RDR_Explorer
                         listView1.Items.Clear();
                         MessageBox.Show(ex.Message, RDR_Explorer.Properties.Resources.ResourceManager.GetString("err"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Application.Exit();
-                   });
+                    });
                 }
             }
         }
@@ -214,7 +216,7 @@ namespace RDR_Explorer
         {
             if (listView1.SelectedItems.Count == 1)
             {
-                if(listView1.SelectedItems[0].Tag.ToString() == "dir")
+                if (listView1.SelectedItems[0].Tag.ToString() == "dir")
                 {
                     RPFLib.Common.Directory directory = new RPFLib.Common.Directory();
                     foreach (RPFLib.Common.fileSystemObject entry in masterlist)
@@ -242,7 +244,7 @@ namespace RDR_Explorer
             }
         }
 
-        
+
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -256,149 +258,463 @@ namespace RDR_Explorer
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            if(currentDir.ParentDirectory != null)
+            if (currentDir.ParentDirectory != null)
             {
                 listView1.Items.Clear();
                 buildlist(currentDir.ParentDirectory);
             }
-            
+
         }
 
         public void BrowseHier(RPFLib.Common.Directory dir, RPFLib.Common.Directory rDir)
         {
             foreach (RPFLib.Common.fileSystemObject d in dir)
             {
-                if(d.IsDirectory)
+                if (d.IsDirectory)
                 {
                     BrowseHier(d as RPFLib.Common.Directory, rDir);
                     System.IO.Directory.CreateDirectory(extrPath + "\\" + rDir.Name + "\\" + d.FullName.Replace(rDir.FullName + "\\", ""));
                 }
                 else
                 {
+                    currentCount++;
                     RPFLib.Common.File file = d as RPFLib.Common.File;
                     byte[] data = file.GetData(false);
                     if (!(System.IO.Directory.Exists(extrPath + "\\" + rDir.Name + "\\" + file.FullName.Replace(rDir.FullName + "\\", "").Replace(file.Name, ""))))
                         System.IO.Directory.CreateDirectory(extrPath + "\\" + rDir.Name + "\\" + file.FullName.Replace(rDir.FullName + "\\", "").Replace(file.Name, ""));
-                    System.IO.File.WriteAllBytes(extrPath + "\\" + rDir.Name + "\\" + file.FullName.Replace(rDir.FullName + "\\", "") , data);
+                    System.IO.File.WriteAllBytes(extrPath + "\\" + rDir.Name + "\\" + file.FullName.Replace(rDir.FullName + "\\", ""), data);
                 }
             }
-            
+
         }
 
         private void extrButton_Click(object sender, EventArgs e)
         {
-            if(listView1.SelectedItems.Count > 1)
+            try
             {
-                using (var sfrm = new FolderBrowserDialog())
-                {
-                    if (sfrm.ShowDialog(this) == DialogResult.OK)
-                    {
-                        extrPath = sfrm.SelectedPath;
-                        foreach (ListViewItem myItem in listView1.SelectedItems)
-                        {
-                            foreach (RPFLib.Common.fileSystemObject entry in masterlist)
-                            {
-                                if (entry.Name == myItem.Text)
-                                {
-                                    if (entry.IsDirectory)
-                                    {
-                                        RPFLib.Common.Directory dir = entry as RPFLib.Common.Directory;
-                                        System.IO.Directory.CreateDirectory(extrPath+ "\\" + dir.Name);
-                                        BrowseHier(dir, dir);
-                                    }
-                                    else
-                                    {
-                                        RPFLib.Common.File file = entry as RPFLib.Common.File;
-                                        byte[] data = file.GetData(false);
-                                        System.IO.File.WriteAllBytes(sfrm.SelectedPath + "\\" + file.Name, data);
-                                    }
-                                }
-                            }
-                        }
-                    }                    
-                }
+                backgroundWorker2.RunWorkerAsync();
             }
-            else
+            catch (Exception ex)
             {
-                using (var sfrm = new SaveFileDialog())
-                {
-                    RPFLib.Common.File file = new RPFLib.Common.File();
-                    foreach (RPFLib.Common.fileSystemObject entry in masterlist)
-                    {
-                        if (entry.Name == listView1.SelectedItems[0].Text && !(entry.IsReturnDirectory))
-                        {
-                            if (entry.IsDirectory)
-                            {
-                                //RPFLib.Common.Directory directory = entry as RPFLib.Common.Directory;
-                                //long longcount = 1;
-                                //do
-                                //{
-                                //    longcount = FolderCount(directory);
-                                //    if (longcount > 0)
-                                //    {
-                                //        foreach (fileSystemObject item in directory)
-                                //        {
-                                //            MessageBox.Show(item.Name);
-                                //        }
-                                //    }
-                                //} while (longcount != 0);
 
-                                
-
-                            }
-                            else
-                            {
-                                file = entry as RPFLib.Common.File;
-                                sfrm.FileName = file.Name;
-                                if (sfrm.ShowDialog(this) == DialogResult.OK)
-                                {
-                                    byte[] data = file.GetData(false);
-                                    System.IO.File.WriteAllBytes(sfrm.FileName, data);
-                                }
-                            }
-                        }
-                    }
-                }
             }
-            
+
         }
 
-        
+
         private int FolderCount(RPFLib.Common.Directory directory)
         {
             int ctr = 0;
-            foreach(fileSystemObject x in directory)
+            foreach (fileSystemObject x in directory)
             {
                 if (x.IsDirectory)
                 {
                     ctr++;
-                }                
+                }
             }
             return ctr;
         }
 
         private void uncompressButton_Click(object sender, EventArgs e)
         {
+            backgroundWorker4.RunWorkerAsync();
+
+        }
+
+        private void extrAllButton_Click(object sender, EventArgs e)
+        {
             using (var sfrm = new FolderBrowserDialog())
             {
-                if (sfrm.ShowDialog(this) == DialogResult.OK)
+                backgroundWorker3.RunWorkerAsync();
+            }
+        }
+
+        public int CountFilesInHier(RPFLib.Common.Directory dir)
+        {
+            foreach (RPFLib.Common.fileSystemObject d in dir)
+            {
+                if (d.IsDirectory)
                 {
-                    List<fileSystemObject> objectList = new List<fileSystemObject>();
-                    if (!(System.IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted")))
+                    Task taskA = Task.Factory.StartNew(() => CountFilesInHier(d as RPFLib.Common.Directory));
+                    taskA.Wait();
+                }
+                else
+                {
+                    countOfFiles++;
+                }
+            }
+            return countOfFiles;
+        }
+
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                if (backButton.GetCurrentParent().InvokeRequired)
+                    backButton.GetCurrentParent().Invoke((MethodInvoker)(() => backButton.Enabled = false));
+                else
+                    backButton.Enabled = false;
+                if (extrButton.GetCurrentParent().InvokeRequired)
+                    extrButton.GetCurrentParent().Invoke((MethodInvoker)(() => extrButton.Enabled = false));
+                else
+                    extrButton.Enabled = false;
+                if (extrAllButton.GetCurrentParent().InvokeRequired)
+                    extrAllButton.GetCurrentParent().Invoke((MethodInvoker)(() => extrAllButton.Enabled = false));
+                else
+                    extrAllButton.Enabled = false;
+                if (uncompressButton.GetCurrentParent().InvokeRequired)
+                    uncompressButton.GetCurrentParent().Invoke((MethodInvoker)(() => uncompressButton.Enabled = false));
+                else
+                    uncompressButton.Enabled = false;
+
+                currentCount = 0;
+
+                using (var sfrm = new FolderBrowserDialog())
+                {
+                    DialogResult testthing = DialogResult.None;
+                    if (this.InvokeRequired)
+                        this.Invoke((MethodInvoker)(() => testthing = sfrm.ShowDialog(this)));
+                    else
+                        testthing = sfrm.ShowDialog(this);
+                    if (testthing == DialogResult.OK)
                     {
-                        System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted");
-                    }
-                    if (listView1.SelectedItems.Count > 1)
-                    {
-                        foreach (ListViewItem myItem in listView1.SelectedItems)
+                        extrPath = sfrm.SelectedPath;
+                        List<string> nameList = new List<string>();
+                        if (this.InvokeRequired)
                         {
+                            this.Invoke((MethodInvoker)(() =>
+                            {
+                                foreach (ListViewItem myItem in listView1.SelectedItems)
+                                {
+                                    nameList.Add(myItem.Text);
+                                }
+                            }));
+                        }
+                        else
+                        {
+                            foreach (ListViewItem myItem in listView1.SelectedItems)
+                            {
+                                nameList.Add(myItem.Text);
+                            }
+                        }
+
+                        countOfFiles = 0;
+                        Task taskA = Task.Factory.StartNew(() =>
+                        {
+                            foreach (string myItem in nameList)
+                            {
+                                foreach (RPFLib.Common.fileSystemObject entry in masterlist)
+                                {
+                                    if (entry.Name == myItem)
+                                    {
+                                        if (entry.IsDirectory)
+                                        {
+                                            RPFLib.Common.Directory dir = entry as RPFLib.Common.Directory;
+                                            CountFilesInHier(dir);
+                                        }
+                                        else
+                                        {
+                                            countOfFiles++;
+                                        }
+                                    }
+                                }
+                            }
+
+                        });
+                        taskA.Wait();
+                        if (toolStripProgressBar1.GetCurrentParent().InvokeRequired)
+                        {
+                            toolStripProgressBar1.GetCurrentParent().Invoke((MethodInvoker)(() =>
+                            {
+                                timer1.Enabled = true;
+                                timer1.Start();
+                            }));
+                        }
+                        else
+                        {
+                            timer1.Enabled = true;
+                            timer1.Start();
+                        }
+                        Task taskB = Task.Factory.StartNew(() =>
+                        {
+                            foreach (string myItem in nameList)
+                            {
+                                foreach (RPFLib.Common.fileSystemObject entry in masterlist)
+                                {
+                                    if (entry.Name == myItem)
+                                    {
+                                        if (entry.IsDirectory)
+                                        {
+                                            RPFLib.Common.Directory dir = entry as RPFLib.Common.Directory;
+                                            System.IO.Directory.CreateDirectory(extrPath + "\\" + dir.Name);
+                                            BrowseHier(dir, dir);
+                                        }
+                                        else
+                                        {
+                                            RPFLib.Common.File file = entry as RPFLib.Common.File;
+                                            byte[] data = file.GetData(false);
+                                            System.IO.File.WriteAllBytes(sfrm.SelectedPath + "\\" + file.Name, data);
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                        taskB.Wait();
+                        if (toolStripProgressBar1.GetCurrentParent().InvokeRequired)
+                        {
+                            toolStripProgressBar1.GetCurrentParent().Invoke((MethodInvoker)(() =>
+                            {
+                                timer1.Stop();
+                                timer1.Enabled = false;
+                                toolStripProgressBar1.Value = 0;
+                            }));
+                        }
+                        else
+                        {
+                            timer1.Stop();
+                            timer1.Enabled = false;
+                            toolStripProgressBar1.Value = 0;
+                        }
+                    }
+                }
+                if (backButton.GetCurrentParent().InvokeRequired)
+                    backButton.GetCurrentParent().Invoke((MethodInvoker)(() => backButton.Enabled = true));
+                else
+                    backButton.Enabled = true;
+                if (extrButton.GetCurrentParent().InvokeRequired)
+                    extrButton.GetCurrentParent().Invoke((MethodInvoker)(() => extrButton.Enabled = true));
+                else
+                    extrButton.Enabled = true;
+                if (extrAllButton.GetCurrentParent().InvokeRequired)
+                    extrAllButton.GetCurrentParent().Invoke((MethodInvoker)(() => extrAllButton.Enabled = true));
+                else
+                    extrAllButton.Enabled = true;
+                if (uncompressButton.GetCurrentParent().InvokeRequired)
+                    uncompressButton.GetCurrentParent().Invoke((MethodInvoker)(() => uncompressButton.Enabled = true));
+                else
+                    uncompressButton.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            toolStripProgressBar1.Maximum = countOfFiles;
+            toolStripProgressBar1.Value = currentCount;
+        }
+
+        private void toolStripProgressBar1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void backgroundWorker3_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                if (backButton.GetCurrentParent().InvokeRequired)
+                    backButton.GetCurrentParent().Invoke((MethodInvoker)(() => backButton.Enabled = false));
+                else
+                    backButton.Enabled = false;
+                if (extrButton.GetCurrentParent().InvokeRequired)
+                    extrButton.GetCurrentParent().Invoke((MethodInvoker)(() => extrButton.Enabled = false));
+                else
+                    extrButton.Enabled = false;
+                if (extrAllButton.GetCurrentParent().InvokeRequired)
+                    extrAllButton.GetCurrentParent().Invoke((MethodInvoker)(() => extrAllButton.Enabled = false));
+                else
+                    extrAllButton.Enabled = false;
+                if (uncompressButton.GetCurrentParent().InvokeRequired)
+                    uncompressButton.GetCurrentParent().Invoke((MethodInvoker)(() => uncompressButton.Enabled = false));
+                else
+                    uncompressButton.Enabled = false;
+                using (FolderBrowserDialog sfrm = new FolderBrowserDialog())
+                {
+                    DialogResult testthing = DialogResult.None;
+                    if (this.InvokeRequired)
+                        this.Invoke((MethodInvoker)(() => testthing = sfrm.ShowDialog(this)));
+                    else
+                        testthing = sfrm.ShowDialog(this);
+                    if (testthing == DialogResult.OK)
+                    {
+                        extrPath = sfrm.SelectedPath;
+                        countOfFiles = 0;
+                        Task taskA = Task.Factory.StartNew(() =>
+                        {
+                            foreach (RPFLib.Common.fileSystemObject entry in masterlist)
+                            {
+                                if (entry.IsDirectory)
+                                {
+                                    RPFLib.Common.Directory dir = entry as RPFLib.Common.Directory;
+                                    CountFilesInHier(dir);
+                                }
+                                else
+                                {
+                                    countOfFiles++;
+                                }
+
+                            }
+                        });
+                        taskA.Wait();
+
+                        if (toolStripProgressBar1.GetCurrentParent().InvokeRequired)
+                        {
+                            toolStripProgressBar1.GetCurrentParent().Invoke((MethodInvoker)(() =>
+                            {
+                                timer1.Enabled = true;
+                                timer1.Start();
+                            }));
+                        }
+                        else
+                        {
+                            timer1.Enabled = true;
+                            timer1.Start();
+                        }
+
+                        Task taskB = Task.Factory.StartNew(() =>
+                        {
+                            foreach (RPFLib.Common.fileSystemObject entry in masterlist)
+                            {
+                                if (entry.IsDirectory)
+                                {
+                                    RPFLib.Common.Directory dir = entry as RPFLib.Common.Directory;
+                                    System.IO.Directory.CreateDirectory(extrPath + "\\" + dir.Name);
+                                    BrowseHier(dir, dir);
+                                }
+                                else
+                                {
+                                    RPFLib.Common.File file = entry as RPFLib.Common.File;
+                                    byte[] data = file.GetData(false);
+                                    System.IO.File.WriteAllBytes(sfrm.SelectedPath + "\\" + file.Name, data);
+                                }
+                            }
+                        });
+                        taskB.Wait();
+
+                        if (toolStripProgressBar1.GetCurrentParent().InvokeRequired)
+                        {
+                            toolStripProgressBar1.GetCurrentParent().Invoke((MethodInvoker)(() =>
+                            {
+                                timer1.Stop();
+                                timer1.Enabled = false;
+                                toolStripProgressBar1.Value = 0;
+                            }));
+                        }
+                        else
+                        {
+                            timer1.Stop();
+                            timer1.Enabled = false;
+                            toolStripProgressBar1.Value = 0;
+                        }
+                    }
+                }
+                if (backButton.GetCurrentParent().InvokeRequired)
+                    backButton.GetCurrentParent().Invoke((MethodInvoker)(() => backButton.Enabled = true));
+                else
+                    backButton.Enabled = true;
+                if (extrButton.GetCurrentParent().InvokeRequired)
+                    extrButton.GetCurrentParent().Invoke((MethodInvoker)(() => extrButton.Enabled = true));
+                else
+                    extrButton.Enabled = true;
+                if (extrAllButton.GetCurrentParent().InvokeRequired)
+                    extrAllButton.GetCurrentParent().Invoke((MethodInvoker)(() => extrAllButton.Enabled = true));
+                else
+                    extrAllButton.Enabled = true;
+                if (uncompressButton.GetCurrentParent().InvokeRequired)
+                    uncompressButton.GetCurrentParent().Invoke((MethodInvoker)(() => uncompressButton.Enabled = true));
+                else
+                    uncompressButton.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void backgroundWorker4_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (backButton.GetCurrentParent().InvokeRequired)
+                backButton.GetCurrentParent().Invoke((MethodInvoker)(() => backButton.Enabled = false));
+            else
+                backButton.Enabled = false;
+            if (extrButton.GetCurrentParent().InvokeRequired)
+                extrButton.GetCurrentParent().Invoke((MethodInvoker)(() => extrButton.Enabled = false));
+            else
+                extrButton.Enabled = false;
+            if (extrAllButton.GetCurrentParent().InvokeRequired)
+                extrAllButton.GetCurrentParent().Invoke((MethodInvoker)(() => extrAllButton.Enabled = false));
+            else
+                extrAllButton.Enabled = false;
+            if (uncompressButton.GetCurrentParent().InvokeRequired)
+                uncompressButton.GetCurrentParent().Invoke((MethodInvoker)(() => uncompressButton.Enabled = false));
+            else
+                uncompressButton.Enabled = false;
+
+            using (var sfrm = new FolderBrowserDialog())
+            {
+                int countOfItems = 0;
+                if (listView1.InvokeRequired)
+                    listView1.Invoke((MethodInvoker)(() => countOfItems = listView1.SelectedItems.Count));
+                else
+                    countOfItems = listView1.SelectedItems.Count;
+                if(countOfItems == 1)
+                {
+                    bool isDir = false;
+                    foreach (RPFLib.Common.fileSystemObject fEntry in masterlist)
+                    {
+                        string fSelectedString = "";
+                        if (this.InvokeRequired)
+                        {
+                            this.Invoke((MethodInvoker)(() =>
+                            {
+                                fSelectedString = listView1.SelectedItems[0].Text;
+                            }));
+                        }
+                        else
+                        {
+                            fSelectedString = listView1.SelectedItems[0].Text;
+                        }
+                        if (fEntry.Name == fSelectedString)
+                        {
+                            isDir = fEntry.IsDirectory;
+                        }
+                    }
+                    if (!(isDir))
+                    {
+                        DialogResult testthing = DialogResult.None;
+                        if (this.InvokeRequired)
+                            this.Invoke((MethodInvoker)(() => testthing = sfrm.ShowDialog(this)));
+                        else
+                            testthing = sfrm.ShowDialog(this);
+                        if (testthing == DialogResult.OK)
+                        {
+                            List<fileSystemObject> objectList = new List<fileSystemObject>();
+                            if (!(System.IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted")))
+                            {
+                                System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted");
+                            }
+
                             RPFLib.Common.File file = new RPFLib.Common.File();
                             foreach (RPFLib.Common.fileSystemObject entry in masterlist)
                             {
-                                if (entry.Name == myItem.Text && !(entry.IsDirectory) && !(entry.IsReturnDirectory))
+                                string selectedString = "";
+                                if (this.InvokeRequired)
+                                {
+                                    this.Invoke((MethodInvoker)(() =>
+                                    {
+                                        selectedString = listView1.SelectedItems[0].Text;
+                                    }));
+                                }
+                                else
+                                {
+                                    selectedString = listView1.SelectedItems[0].Text;
+                                }
+                                if (entry.Name == selectedString && !(entry.IsDirectory))
                                 {
                                     file = entry as RPFLib.Common.File;
-
                                     byte[] data = file.GetData(false);
                                     System.IO.File.WriteAllBytes(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted\\" + file.Name, data);
                                     ProcessStartInfo startInfo = new ProcessStartInfo("RSCUnpacker.exe");
@@ -418,69 +734,32 @@ namespace RDR_Explorer
                                         myFile.MoveTo(sfrm.SelectedPath + "\\" + myFile.Name);
                                     }
                                 }
-                            }
-                        }
-
-
-
-                    }
-                    else
-                    {
-                        RPFLib.Common.File file = new RPFLib.Common.File();
-                        foreach (RPFLib.Common.fileSystemObject entry in masterlist)
-                        {
-                            if (entry.Name == listView1.SelectedItems[0].Text && !(entry.IsDirectory) && !(entry.IsReturnDirectory))
-                            {
-                                file = entry as RPFLib.Common.File;
-                                byte[] data = file.GetData(false);
-                                System.IO.File.WriteAllBytes(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted\\" + file.Name, data);
-                                ProcessStartInfo startInfo = new ProcessStartInfo("RSCUnpacker.exe");
-                                startInfo.Arguments = "\"" + Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted\\" + file.Name + "\" -Xbox360";
-                                startInfo.UseShellExecute = false;
-                                startInfo.CreateNoWindow = true;
-                                Process Extractor = Process.Start(startInfo);
-                                Extractor.WaitForExit();
-                                System.IO.File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted\\" + file.Name);
-                                System.IO.DirectoryInfo myDir = new System.IO.DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Reditec\\RDR Explorer\\extracted\\");
-                                foreach (System.IO.FileInfo myFile in myDir.GetFiles())
+                                else
                                 {
-                                    if (System.IO.File.Exists(sfrm.SelectedPath + "\\" + myFile.Name))
-                                    {
-                                        System.IO.File.Delete(sfrm.SelectedPath + "\\" + myFile.Name);
-                                    }
-                                    myFile.MoveTo(sfrm.SelectedPath + "\\" + myFile.Name);
+
                                 }
                             }
                         }
                     }
-                }
-            }
-        }
-
-        private void extrAllButton_Click(object sender, EventArgs e)
-        {
-            using (var sfrm = new FolderBrowserDialog())
-            {
-                if (sfrm.ShowDialog(this) == DialogResult.OK)
-                {
-                    extrPath = sfrm.SelectedPath;
-                    foreach (RPFLib.Common.fileSystemObject entry in masterlist)
-                    {
-                        if (entry.IsDirectory)
-                        {
-                            RPFLib.Common.Directory dir = entry as RPFLib.Common.Directory;
-                            System.IO.Directory.CreateDirectory(extrPath + "\\" + dir.Name);
-                            BrowseHier(dir, dir);
-                        }
-                        else
-                        {
-                            RPFLib.Common.File file = entry as RPFLib.Common.File;
-                            byte[] data = file.GetData(false);
-                            System.IO.File.WriteAllBytes(sfrm.SelectedPath + "\\" + file.Name, data);
-                        }
+                
                     }
                 }
-            }
+            if (backButton.GetCurrentParent().InvokeRequired)
+                backButton.GetCurrentParent().Invoke((MethodInvoker)(() => backButton.Enabled = true));
+            else
+                backButton.Enabled = true;
+            if (extrButton.GetCurrentParent().InvokeRequired)
+                extrButton.GetCurrentParent().Invoke((MethodInvoker)(() => extrButton.Enabled = true));
+            else
+                extrButton.Enabled = true;
+            if (extrAllButton.GetCurrentParent().InvokeRequired)
+                extrAllButton.GetCurrentParent().Invoke((MethodInvoker)(() => extrAllButton.Enabled = true));
+            else
+                extrAllButton.Enabled = true;
+            if (uncompressButton.GetCurrentParent().InvokeRequired)
+                uncompressButton.GetCurrentParent().Invoke((MethodInvoker)(() => uncompressButton.Enabled = true));
+            else
+                uncompressButton.Enabled = true;
+        }
         }
     }
- }
